@@ -32,6 +32,8 @@ public final class Constants {
     public static final double tSpeed = 0.6;
     public static final double autonSpeed = 0.4;
 
+    public static final int dumperPort = 7;
+
     // Pneumatics Channel Numbers
     public static final int solOneForward = 0;
     public static final int solOneReverse = 1;
