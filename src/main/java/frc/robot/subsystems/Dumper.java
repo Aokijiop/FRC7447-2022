@@ -23,12 +23,15 @@ public class Dumper extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void moveDumper(double dumperVoltage) {
+  public void dumperIntake(double dumperVoltage) {
     m_dumperMotor.set(ControlMode.PercentOutput, dumperVoltage);
+  }
+
+  public void dumperVomit(double dumperRetch){
+    m_dumperMotor.set(ControlMode.PercentOutput, dumperRetch);
   }
 
   public void stopDumper() {
     m_dumperMotor.stopMotor();
   }
-
 }

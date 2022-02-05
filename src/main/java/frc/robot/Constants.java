@@ -33,6 +33,8 @@ public final class Constants {
     public static final double autonSpeed = 0.4;
 
     public static final int dumperPort = 7;
+    public static final double dumperPower = 0.5;
+    public static final double dumperRetch = -0.5;
 
     // Pneumatics Channel Numbers
     public static final int solOneForward = 0;
@@ -52,6 +54,8 @@ public final class Constants {
     public static final int aButton = 2;
     public static final int bButton = 3;
     public static final int yButton = 4;
+    public static final int LButton = 5;
+    public static final int RButton = 6;
     public static final int LTrigger = 7;
     public static final int RTrigger = 8;
 
