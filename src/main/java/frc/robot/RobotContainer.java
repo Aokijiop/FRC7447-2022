@@ -15,10 +15,13 @@ import frc.robot.commands.AutonTwo;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveManually;
 import frc.robot.commands.IntakeBall;
+import frc.robot.commands.DumperIntake;
+import frc.robot.commands.DumperVomit;
 import frc.robot.commands.PneumaticShoot;
 import frc.robot.commands.ShootBall;
 // import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Dumper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.PneumaticShooter;
 import frc.robot.subsystems.Shooter;
@@ -39,6 +42,7 @@ public class RobotContainer {
   private final Shooter m_shooter;
   private final Intake m_intake;
   private final PneumaticShooter m_pneumaticShooter;
+  private final Dumper m_dumper;
 
   // Commands
   private final DriveManually m_driveManually;
@@ -46,6 +50,12 @@ public class RobotContainer {
   private final ShootBall m_shootBall;
   private final IntakeBall m_intakeBall;
   private final AutoShoot m_autoShoot;
+
+
+  private final DumperIntake m_dumperIntake;
+  private final DumperVomit m_dumperVomit;
+
+
   private final PneumaticShoot m_pneumaticShoot;
   // private final TurnToAngle m_turnTo180;
   // private final TurnToAngle m_turnTo90;
@@ -65,6 +75,8 @@ public class RobotContainer {
   public static JoystickButton LTrigger;
   public static JoystickButton RTrigger;
   public static JoystickButton yButton;
+  public static JoystickButton LButton;
+  public static JoystickButton RButton;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -73,6 +85,8 @@ public class RobotContainer {
     m_shooter = new Shooter();
     m_intake = new Intake();
     m_pneumaticShooter = new PneumaticShooter();
+    m_dumper = new Dumper();
+    
 
     // Commands
     m_driveManually = new DriveManually(m_driveTrain);
@@ -88,10 +102,8 @@ public class RobotContainer {
     m_autoShoot.addRequirements(m_shooter);
     m_pneumaticShoot = new PneumaticShoot(m_pneumaticShooter);
     m_pneumaticShoot.addRequirements(m_pneumaticShooter);
-    // m_turnTo180 = new TurnToAngle(m_driveTrain, 180.0f);
-    // m_turnTo180.addRequirements(m_driveTrain);
-    // m_turnTo90 = new TurnToAngle(m_driveTrain, 90.0f);
-    // m_turnTo90.addRequirements(m_driveTrain);
+    m_dumperIntake = new DumperIntake(m_dumper);
+    m_dumperVomit = new DumperVomit(m_dumper);
 
     // Autonomous Commands
     m_autonOne = new AutonOne(m_driveTrain, m_shooter);
@@ -110,6 +122,8 @@ public class RobotContainer {
     yButton = new JoystickButton(m_joystick, Constants.yButton);
     LTrigger = new JoystickButton(m_joystick, Constants.LTrigger);
     RTrigger = new JoystickButton(m_joystick, Constants.RTrigger);
+    LButton = new JoystickButton(m_joystick, Constants.LButton);
+    RButton = new JoystickButton(m_joystick, Constants.RButton);
     
 
     // Configure the button bindings
@@ -127,7 +141,10 @@ public class RobotContainer {
     LTrigger.whenHeld(m_intakeBall);
     bButton.toggleWhenPressed(m_driveForwardTimed, false);
     aButton.whenHeld(m_pneumaticShoot);
-    // yButton.toggleWhenPressed(m_turnTo180);
+    LButton.whenHeld(m_dumperIntake);
+    RButton.whenHeld(m_dumperVomit);
+
+
   }
 
   /**

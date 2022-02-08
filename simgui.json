@@ -21,6 +21,21 @@
           "open": true
         }
       },
+      "Victor SPX[4]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Victor SPX[6]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Victor SPX[7]": {
+        "header": {
+          "open": true
+        }
+      },
       "navX-Sensor[0]": {
         "header": {
           "open": true
@@ -42,6 +57,7 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/DriveTrain": "Subsystem",
+      "/LiveWindow/Dumper": "Subsystem",
       "/LiveWindow/Intake": "Subsystem",
       "/LiveWindow/PneumaticShooter": "Subsystem",
       "/LiveWindow/Shooter": "Subsystem",
