@@ -24,7 +24,7 @@ public class TurnToAngle extends CommandBase {
     m_driveTrain.resetGyro();
     finish = false;
     m_driveTrain.setTurnSetpoint(180.0f);
-    System.out.println("Command initialized");
+    System.out.println("TurnToAngle command initialized");
   }
 
   // Called every time the scheduler runs while the command is scheduled.

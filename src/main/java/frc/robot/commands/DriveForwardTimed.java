@@ -11,7 +11,7 @@ import frc.robot.subsystems.DriveTrain;
 
 public class DriveForwardTimed extends CommandBase {
   DriveTrain m_driveTrain;
-  private boolean finish = false;
+  private boolean finish;
   Timer timer;
 
   /** Creates a new DriveForwardTimed. */
@@ -24,23 +24,30 @@ public class DriveForwardTimed extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    finish = false;
+    timer.reset();
+    timer.start();
+    System.out.println("DriveForwardTimed command initialized");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    timer.reset();
-    timer.start();
-    while (timer.get() < Constants.drive_fwd_time) {
-      m_driveTrain.driveForward(Constants.autonSpeed);
+    m_driveTrain.driveForward(Constants.autonSpeed);
+    System.out.println("Driving forward");
+    if (timer.get() >= Constants.drive_fwd_time) {
+      finish  = true;
+      System.out.println("Time setpoint reached");
+      timer.stop();
     }
-    finish = true;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_driveTrain.stop();
+    System.out.println("Stopping motors and ending command");
   }
 
   // Returns true when the command should end.
