@@ -82,6 +82,7 @@ public class DriveTrain extends SubsystemBase {
 
   public void updateTurnMeasurement() {
     turnMeasurement = m_gyro.getAngle();
+    System.out.println("Updatting angle measurement");
   }
 
   public boolean atTurnSetpoint() {
