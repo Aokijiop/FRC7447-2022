@@ -39,6 +39,10 @@ public final class Constants {
     public static final int solTwoReverse = 3;
     public static final int solThreeForward = 4;
     public static final int solThreeReverse = 5;
+
+    // Ultrasonic rangefinder DIO port numbers
+    public static final int pingChannel = 0;
+    public static final int echoChannel = 1;
     
     // Joystick port and axis numbers
     public static final int joystickPort = 0;
