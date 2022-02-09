@@ -110,6 +110,10 @@ public class DriveTrain extends SubsystemBase {
     m_drive.arcadeDrive(speed, 0);
   }
 
+  public void boost(double speedBoost, double speed) {
+    m_drive.arcadeDrive(speed * speedBoost, 0);
+  }
+
   public void stop() {
     m_drive.stopMotor();
   }
@@ -147,3 +151,5 @@ public class DriveTrain extends SubsystemBase {
 ░░░░░░██░░░░░░░░░░████░░░░░░████░░░░░░░░░░██
 ░░░░░░░░██████████░░░░░░░░░░░░░░██████████
 */
+
+// snas !!!
