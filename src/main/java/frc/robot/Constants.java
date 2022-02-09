@@ -13,6 +13,9 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    // 6 motor controllers
+    // 1 Spark motor controller for arm
+
     // Device numbers for the motors
     public static final int leftFront = 0;
     public static final int rightFront = 2;
