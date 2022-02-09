@@ -14,7 +14,6 @@ public class DumperLower extends CommandBase {
 
   public DumperLower(Dumper d) {
     // Use addRequirements() here to declare subsystem dependencies.
-    Dumper m_dumperMover;
     m_dumperMover = d;
     addRequirements(m_dumperMover);
   }
