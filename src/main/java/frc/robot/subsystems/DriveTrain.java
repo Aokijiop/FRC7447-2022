@@ -82,7 +82,7 @@ public class DriveTrain extends SubsystemBase {
 
   public void updateTurnMeasurement() {
     turnMeasurement = m_gyro.getAngle();
-    System.out.println("Updatting angle measurement");
+    System.out.println("Updating angle measurement");
   }
 
   public boolean atTurnSetpoint() {
@@ -108,6 +108,10 @@ public class DriveTrain extends SubsystemBase {
 
   public void driveForward(double speed) {
     m_drive.arcadeDrive(speed, 0);
+  }
+
+  public void boost(double speedBoost, double speed) {
+    m_drive.arcadeDrive(speed * speedBoost, 0);
   }
 
   public void stop() {
@@ -147,3 +151,5 @@ public class DriveTrain extends SubsystemBase {
 ░░░░░░██░░░░░░░░░░████░░░░░░████░░░░░░░░░░██
 ░░░░░░░░██████████░░░░░░░░░░░░░░██████████
 */
+
+// snas !!!
