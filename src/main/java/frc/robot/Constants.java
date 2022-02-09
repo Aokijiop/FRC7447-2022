@@ -13,9 +13,6 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    // 6 totol motor controllers
-    // Arm lift uses Spark controller
-
     // Device numbers for the motors
     public static final int leftFront = 0;
     public static final int rightFront = 2;
@@ -37,8 +34,11 @@ public final class Constants {
     public static final double autonSpeed = 0.4;
 
     public static final int dumperPort = 7;
+    public static final int dumperMovePort = 8;
     public static final double dumperPower = 0.5;
     public static final double dumperRetch = -0.5;
+    public static final double dumperUpSpeed =  0.5;
+    public static final double dumperDownSpeed = -0.5;
 
     // Pneumatics Channel Numbers
     public static final int solOneForward = 0;
@@ -66,4 +66,5 @@ public final class Constants {
     public static final int RButton = 6;
     public static final int LTrigger = 7;
     public static final int RTrigger = 8;
+
 }
