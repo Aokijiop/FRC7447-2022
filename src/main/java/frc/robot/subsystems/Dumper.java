@@ -6,8 +6,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANSparkMax;
 
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -19,7 +19,7 @@ public class Dumper extends SubsystemBase {
 
   public Dumper() {
     m_dumperMotor = new WPI_VictorSPX(Constants.dumperPort);
-    m_dumperMoveMotor = new CANSparkMax(Constants.dumperMovePort);
+    m_dumperMoveMotor = new CANSparkMax(Constants.dumperMovePort, null);
     }
 
   @Override
@@ -35,13 +35,10 @@ public class Dumper extends SubsystemBase {
     m_dumperMotor.set(ControlMode.PercentOutput, dumperRetch);
   }
 
-  public void dumperUp(double dumperUpSpeed){
-    m_dumperMoveMotor.set(ControlMode.PercentOutput, dumperUpSpeed);
+  public void dumperMove(double dumperUpSpeed){
+    m_dumperMoveMotor.set(dumperUpSpeed);
   }
 
-  public void dumperDown(double dumperDownSpeed){
-
-  }
 
   public void stopDumper() {
     m_dumperMotor.stopMotor();

@@ -14,6 +14,8 @@ import frc.robot.commands.Boost;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveManually;
 import frc.robot.commands.DumperIntake;
+import frc.robot.commands.DumperLower;
+import frc.robot.commands.DumperRaise;
 import frc.robot.commands.DumperVomit;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.DriveTrain;
@@ -40,6 +42,8 @@ public class RobotContainer {
   private final DumperIntake m_dumperIntake;
   private final DumperVomit m_dumperVomit;
   private final TurnToAngle m_turnToAngle;
+  private final DumperRaise m_dumperMoveMotorUp;
+  private final DumperLower m_dumperMoveMotorDown;
   private final Boost m_boost;
 
   // Autonomous Commands
@@ -75,6 +79,8 @@ public class RobotContainer {
     m_dumperIntake = new DumperIntake(m_dumper);
     m_dumperVomit = new DumperVomit(m_dumper);
     m_turnToAngle = new TurnToAngle(m_driveTrain);
+    m_dumperMoveMotorDown = new DumperLower(m_dumper);
+    m_dumperMoveMotorUp = new DumperRaise(m_dumper);
     m_boost = new Boost(m_driveTrain);
 
     // Autonomous Commands
@@ -113,6 +119,8 @@ public class RobotContainer {
     RTrigger.whenHeld(m_dumperVomit);
     yButton.toggleWhenPressed(m_turnToAngle);
     RButton.whenHeld(m_boost);
+    xButton.whenHeld(m_dumperMoveMotorDown);
+    aButton.whenHeld(m_dumperMoveMotorUp);
   }
 
   /**

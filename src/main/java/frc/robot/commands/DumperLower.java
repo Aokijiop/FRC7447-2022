@@ -2,14 +2,21 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Dumper;
+import frc.robot.Constants;
 
-public class DumperMoveDown extends CommandBase {
+public class DumperLower extends CommandBase {
   /** Creates a new DumperMoveDown. */
-  public DumperMoveDown() {
+  Dumper m_dumperMover;
+
+  public DumperLower(Dumper d) {
     // Use addRequirements() here to declare subsystem dependencies.
+    Dumper m_dumperMover;
+    m_dumperMover = d;
+    addRequirements(m_dumperMover);
   }
 
   // Called when the command is initially scheduled.
@@ -18,7 +25,9 @@ public class DumperMoveDown extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_dumperMover.dumperMove(Constants.dumperDownSpeed);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
