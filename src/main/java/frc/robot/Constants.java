@@ -21,35 +21,23 @@ public final class Constants {
     public static final int rightFront = 2;
     public static final int leftBack = 1;
     public static final int rightBack = 3;
+    public static final int dumperPort = 7;
+    public static final int dumperMovePort = 8;
 
-    public static final int shooterM = 6;
-    public static final double shootSpeed = 0.85;
-    public static final double autoShootTimer = 2.0;
-
-    public static final int intakeM = 4;
-    public static final double intakeSpeed = 0.5;
-
+    // Time Values for Time-Based Commands
     public static final double drive_fwd_time = 3.0;
 
+    // Speed Constants
     public static final double mSpeed = 0.6;
     public static final double tSpeed = 0.6;
     public static final double speedBoost = 1.42;
     public static final double autonSpeed = 0.4;
 
-    public static final int dumperPort = 7;
-    public static final int dumperMovePort = 8;
+    // Dumper Constants
     public static final double dumperPower = 0.5;
     public static final double dumperRetch = -0.5;
     public static final double dumperUpSpeed =  0.5;
     public static final double dumperDownSpeed = -0.5;
-
-    // Pneumatics Channel Numbers
-    public static final int solOneForward = 0;
-    public static final int solOneReverse = 1;
-    public static final int solTwoForward = 2;
-    public static final int solTwoReverse = 3;
-    public static final int solThreeForward = 4;
-    public static final int solThreeReverse = 5;
 
     // Ultrasonic rangefinder DIO port numbers
     public static final int pingChannel = 0;
