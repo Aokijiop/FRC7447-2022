@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -19,7 +20,7 @@ public class Dumper extends SubsystemBase {
 
   public Dumper() {
     m_dumperMotor = new WPI_VictorSPX(Constants.dumperPort);
-    m_dumperMoveMotor = new CANSparkMax(Constants.dumperMovePort, null);
+    m_dumperMoveMotor = new CANSparkMax(Constants.dumperMovePort, MotorType.kBrushless);
     }
 
   @Override
