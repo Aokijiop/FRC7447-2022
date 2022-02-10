@@ -10,9 +10,12 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.SeqComGroupEx;
+import frc.robot.commands.BoostBoolean;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveManually;
 import frc.robot.commands.DumperIntake;
+import frc.robot.commands.DumperLower;
+import frc.robot.commands.DumperRaise;
 import frc.robot.commands.DumperVomit;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.DriveTrain;
@@ -39,6 +42,9 @@ public class RobotContainer {
   private final DumperIntake m_dumperIntake;
   private final DumperVomit m_dumperVomit;
   private final TurnToAngle m_turnToAngle;
+  private final DumperRaise m_dumperMoveMotorUp;
+  private final DumperLower m_dumperMoveMotorDown;
+  private final BoostBoolean m_boost;
 
   // Autonomous Commands
   private final SeqComGroupEx m_autonOne;
@@ -73,6 +79,9 @@ public class RobotContainer {
     m_dumperIntake = new DumperIntake(m_dumper);
     m_dumperVomit = new DumperVomit(m_dumper);
     m_turnToAngle = new TurnToAngle(m_driveTrain);
+    m_dumperMoveMotorDown = new DumperLower(m_dumper);
+    m_dumperMoveMotorUp = new DumperRaise(m_dumper);
+    m_boost = new BoostBoolean(m_driveTrain);
 
     // Autonomous Commands
     m_autonOne = new SeqComGroupEx(m_driveTrain);
@@ -109,6 +118,9 @@ public class RobotContainer {
     LTrigger.whenHeld(m_dumperIntake);
     RTrigger.whenHeld(m_dumperVomit);
     yButton.toggleWhenPressed(m_turnToAngle);
+    RButton.whenHeld(m_boost);
+    xButton.whenHeld(m_dumperMoveMotorDown);
+    aButton.whenHeld(m_dumperMoveMotorUp);
   }
 
   /**
