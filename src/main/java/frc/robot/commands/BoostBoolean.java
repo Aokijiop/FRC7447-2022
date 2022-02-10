@@ -14,7 +14,6 @@ public class BoostBoolean extends CommandBase {
   public BoostBoolean(DriveTrain dt) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_driveTrain = dt;
-    addRequirements(m_driveTrain);
   }
 
   // Called when the command is initially scheduled.
