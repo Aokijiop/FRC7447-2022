@@ -37,11 +37,15 @@ public class Dumper extends SubsystemBase {
   }
 
   public void dumperMove(double dumperUpSpeed){
-    m_dumperMoveMotor.set(dumperUpSpeed);
+    m_dumperMoveMotor.setVoltage(dumperUpSpeed);
   }
 
 
   public void stopDumper() {
     m_dumperMotor.stopMotor();
+  }
+
+  public void stopElevationDumper() {
+    m_dumperMoveMotor.stopMotor();
   }
 }
