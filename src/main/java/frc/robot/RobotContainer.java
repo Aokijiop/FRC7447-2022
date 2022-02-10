@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.SeqComGroupEx;
-import frc.robot.commands.Boost;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveManually;
 import frc.robot.commands.DumperIntake;
@@ -40,7 +39,6 @@ public class RobotContainer {
   private final DumperIntake m_dumperIntake;
   private final DumperVomit m_dumperVomit;
   private final TurnToAngle m_turnToAngle;
-  private final Boost m_boost;
 
   // Autonomous Commands
   private final SeqComGroupEx m_autonOne;
@@ -75,7 +73,6 @@ public class RobotContainer {
     m_dumperIntake = new DumperIntake(m_dumper);
     m_dumperVomit = new DumperVomit(m_dumper);
     m_turnToAngle = new TurnToAngle(m_driveTrain);
-    m_boost = new Boost(m_driveTrain);
 
     // Autonomous Commands
     m_autonOne = new SeqComGroupEx(m_driveTrain);
@@ -112,7 +109,6 @@ public class RobotContainer {
     LTrigger.whenHeld(m_dumperIntake);
     RTrigger.whenHeld(m_dumperVomit);
     yButton.toggleWhenPressed(m_turnToAngle);
-    RButton.whenHeld(m_boost);
   }
 
   /**

@@ -31,10 +31,13 @@ public class DriveTrain extends SubsystemBase {
   PIDController m_turnController;
   AHRS m_gyro;
   double turnMeasurement;
-  
+
   // Drive to Distance PID
   PIDController m_distanceController;
   Ultrasonic m_rangeFinder;
+
+  // Boost boolean
+  public boolean RButtonHeld = false;
 
   // Turn Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
   static final double kPt = 0.0;
@@ -103,15 +106,19 @@ public class DriveTrain extends SubsystemBase {
   // Other Commands
   // Might need to manually add a negative sign later if invert doesn't work
   public void driveManually(Joystick joystick, double speed, double turnSpeed) {
-    m_drive.arcadeDrive(-joystick.getRawAxis(Constants.y_axis) * speed, joystick.getRawAxis(Constants.z_axis) * turnSpeed);
+    m_drive.arcadeDrive(-joystick.getRawAxis(Constants.y_axis) * speed, joystick.getRawAxis(Constants.z_axis) * turnSpeed); 
+  }
+
+  public void activateBoostBoolean() {
+    RButtonHeld = true;
+  }
+
+  public void deactivateBoostBoolean() {
+    RButtonHeld = false;
   }
 
   public void driveForward(double speed) {
     m_drive.arcadeDrive(speed, 0);
-  }
-
-  public void boost(double speedBoost, double speed) {
-    m_drive.arcadeDrive(speed * speedBoost, 0);
   }
 
   public void stop() {
