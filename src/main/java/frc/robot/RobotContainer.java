@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.SeqComGroupEx;
-import frc.robot.commands.Boost;
+import frc.robot.commands.BoostBoolean;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveManually;
 import frc.robot.commands.DumperIntake;
@@ -44,7 +44,7 @@ public class RobotContainer {
   private final DumperVomit m_dumperVomit;
   private final DumperRaise m_dumperMoveMotorUp;
   private final DumperLower m_dumperMoveMotorDown;
-  private final Boost m_boost;
+  private final BoostBoolean m_boost;
 
   // Turn to Angle Commands
   private final TurnToAngle m_cancelTurnTo;
@@ -100,7 +100,7 @@ public class RobotContainer {
     m_dumperVomit = new DumperVomit(m_dumper);
     m_dumperMoveMotorDown = new DumperLower(m_dumper);
     m_dumperMoveMotorUp = new DumperRaise(m_dumper);
-    m_boost = new Boost(m_driveTrain);
+    m_boost = new BoostBoolean(m_driveTrain);
 
     // Turn to Angle Commands
     m_cancelTurnTo = new TurnToAngle(m_driveTrain, 0.0f);
