@@ -57,5 +57,4 @@ public final class Constants {
     public static final int RButton = 6;
     public static final int LTrigger = 7;
     public static final int RTrigger = 8;
-
 }
