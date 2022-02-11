@@ -27,9 +27,14 @@ public class DriveManually extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTrain.driveManually(RobotContainer.m_joystick, Constants.mSpeed, Constants.tSpeed);
+    if (!m_driveTrain.RButtonHeld) {
+      m_driveTrain.driveManually(RobotContainer.m_joystick, Constants.mSpeed, Constants.tSpeed);
+    } else {
+      m_driveTrain.driveManually(RobotContainer.m_joystick, Constants.speedBoost, Constants.tSpeed);
+    }
     SmartDashboard.putNumber("Movement speed", RobotContainer.m_joystick.getRawAxis(Constants.y_axis));
-  }
+
+    }
 
   // Called once the command ends or is interrupted.
   @Override

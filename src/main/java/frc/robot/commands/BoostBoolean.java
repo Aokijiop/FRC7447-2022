@@ -5,16 +5,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
-public class Boost extends CommandBase {
+public class BoostBoolean extends CommandBase {
+  /** Creates a new Boost. */
   DriveTrain m_driveTrain;
 
-  public Boost(DriveTrain dt) {
+  public BoostBoolean(DriveTrain dt) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_driveTrain = dt;
-    addRequirements(m_driveTrain);
   }
 
   // Called when the command is initially scheduled.
@@ -24,12 +23,14 @@ public class Boost extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTrain.boost(Constants.speedBoost, Constants.mSpeed);
+    m_driveTrain.activateBoostBoolean();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_driveTrain.deactivateBoostBoolean();
+  }
 
   // Returns true when the command should end.
   @Override

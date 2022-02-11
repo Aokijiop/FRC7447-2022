@@ -9,12 +9,14 @@ import frc.robot.subsystems.DriveTrain;
 
 public class TurnToAngle extends CommandBase {
   DriveTrain m_driveTrain;
+  double angleSetpoint;
   private boolean finish;
 
   /** Creates a new TurnToAngle. */
-  public TurnToAngle(DriveTrain dt) {
+  public TurnToAngle(DriveTrain dt, double a) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_driveTrain = dt;
+    angleSetpoint = a;
     addRequirements(m_driveTrain);
   }
 
@@ -23,8 +25,8 @@ public class TurnToAngle extends CommandBase {
   public void initialize() {
     m_driveTrain.resetGyro();
     finish = false;
-    m_driveTrain.setTurnSetpoint(180.0f);
-    System.out.println("TurnToAngle command initialized");
+    m_driveTrain.setTurnSetpoint(angleSetpoint);
+    System.out.println("TurnToAngle command initialized, setpoint set to: " + angleSetpoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

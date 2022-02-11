@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.SeqComGroupEx;
-import frc.robot.commands.Boost;
+import frc.robot.commands.BoostBoolean;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveManually;
 import frc.robot.commands.DumperIntake;
@@ -22,6 +22,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Dumper;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -41,10 +42,19 @@ public class RobotContainer {
   private final DriveForwardTimed m_driveForwardTimed;
   private final DumperIntake m_dumperIntake;
   private final DumperVomit m_dumperVomit;
-  private final TurnToAngle m_turnToAngle;
   private final DumperRaise m_dumperMoveMotorUp;
   private final DumperLower m_dumperMoveMotorDown;
-  private final Boost m_boost;
+  private final BoostBoolean m_boost;
+
+  // Turn to Angle Commands
+  private final TurnToAngle m_cancelTurnTo;
+  private final TurnToAngle m_turnTo45;
+  private final TurnToAngle m_turnTo90;
+  private final TurnToAngle m_turnTo135;
+  private final TurnToAngle m_turnTo180;
+  private final TurnToAngle m_turnTo45cc;
+  private final TurnToAngle m_turnTo90cc;
+  private final TurnToAngle m_turnTo135cc;
 
   // Autonomous Commands
   private final SeqComGroupEx m_autonOne;
@@ -63,6 +73,16 @@ public class RobotContainer {
   public static JoystickButton LButton;
   public static JoystickButton RButton;
 
+  // POV Buttons
+  public static POVButton pov0;
+  public static POVButton pov45;
+  public static POVButton pov90;
+  public static POVButton pov135;
+  public static POVButton pov180;
+  public static POVButton pov225;
+  public static POVButton pov270;
+  public static POVButton pov315;
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Subsystems
@@ -78,10 +98,19 @@ public class RobotContainer {
     m_driveForwardTimed.addRequirements(m_driveTrain);
     m_dumperIntake = new DumperIntake(m_dumper);
     m_dumperVomit = new DumperVomit(m_dumper);
-    m_turnToAngle = new TurnToAngle(m_driveTrain);
     m_dumperMoveMotorDown = new DumperLower(m_dumper);
     m_dumperMoveMotorUp = new DumperRaise(m_dumper);
-    m_boost = new Boost(m_driveTrain);
+    m_boost = new BoostBoolean(m_driveTrain);
+
+    // Turn to Angle Commands
+    m_cancelTurnTo = new TurnToAngle(m_driveTrain, 0.0f);
+    m_turnTo45 = new TurnToAngle(m_driveTrain, 45.0f);
+    m_turnTo90 = new TurnToAngle(m_driveTrain, 90.0f);
+    m_turnTo135 = new TurnToAngle(m_driveTrain, 135.0f);
+    m_turnTo180 = new TurnToAngle(m_driveTrain, 180.0f);
+    m_turnTo45cc = new TurnToAngle(m_driveTrain, -45.0f);
+    m_turnTo90cc = new TurnToAngle(m_driveTrain, -90.0f);
+    m_turnTo135cc = new TurnToAngle(m_driveTrain, -135.0f);
 
     // Autonomous Commands
     m_autonOne = new SeqComGroupEx(m_driveTrain);
@@ -101,7 +130,16 @@ public class RobotContainer {
     RTrigger = new JoystickButton(m_joystick, Constants.RTrigger);
     LButton = new JoystickButton(m_joystick, Constants.LButton);
     RButton = new JoystickButton(m_joystick, Constants.RButton);
-    
+
+    // POV Buttons
+    pov0 = new POVButton(m_joystick, 0, 0);
+    pov45 = new POVButton(m_joystick, 45, 0);
+    pov90 = new POVButton(m_joystick, 90, 0);
+    pov135 = new POVButton(m_joystick, 135, 0);
+    pov180 = new POVButton(m_joystick, 180, 0);
+    pov225 = new POVButton(m_joystick, 225, 0);
+    pov270 = new POVButton(m_joystick, 270, 0);
+    pov315 = new POVButton(m_joystick, 315, 0);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -117,10 +155,17 @@ public class RobotContainer {
     bButton.toggleWhenPressed(m_driveForwardTimed, false);
     LTrigger.whenHeld(m_dumperIntake);
     RTrigger.whenHeld(m_dumperVomit);
-    yButton.toggleWhenPressed(m_turnToAngle);
     RButton.whenHeld(m_boost);
     xButton.whenHeld(m_dumperMoveMotorDown);
     aButton.whenHeld(m_dumperMoveMotorUp);
+    pov0.toggleWhenPressed(m_cancelTurnTo);
+    pov45.toggleWhenPressed(m_turnTo45);
+    pov90.toggleWhenPressed(m_turnTo90);
+    pov135.toggleWhenPressed(m_turnTo135);
+    pov180.toggleWhenPressed(m_turnTo180);
+    pov225.toggleWhenPressed(m_turnTo45cc);
+    pov270.toggleWhenPressed(m_turnTo90cc);
+    pov315.toggleWhenPressed(m_turnTo135cc);
   }
 
   /**
