@@ -8,7 +8,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -28,18 +27,13 @@ public class Dumper extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void dumperIntake(double dumperVoltage) {
+  public void dumperAdjust(double dumperVoltage) {
     m_dumperMotor.set(ControlMode.PercentOutput, dumperVoltage);
-  }
-
-  public void dumperVomit(double dumperRetch){
-    m_dumperMotor.set(ControlMode.PercentOutput, dumperRetch);
   }
 
   public void dumperMove(double dumperUpSpeed){
     m_dumperMoveMotor.setVoltage(dumperUpSpeed);
   }
-
 
   public void stopDumper() {
     m_dumperMotor.stopMotor();
