@@ -113,7 +113,7 @@ public class RobotContainer {
     m_turnTo135cc = new TurnToAngle(m_driveTrain, -135.0f);
 
     // Autonomous Commands
-    m_autonOne = new SeqComGroupEx(m_driveTrain);
+    m_autonOne = new SeqComGroupEx(m_driveTrain, m_dumper);
     
     // Autonomous Command Chooser
     m_chooser.setDefaultOption("AutonOne", m_autonOne);

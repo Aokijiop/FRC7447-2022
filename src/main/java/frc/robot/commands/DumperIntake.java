@@ -25,7 +25,7 @@ public class DumperIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_dumper.dumperAdjust(Constants.dumperPower);
+    m_dumper.dumpingMove(Constants.dumperPower);
   }
 
   // Called once the command ends or is interrupted.
