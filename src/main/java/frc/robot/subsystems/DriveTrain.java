@@ -35,7 +35,7 @@ public class DriveTrain extends SubsystemBase {
   // Drive to Distance PID
   PIDController m_distanceController;
   Ultrasonic m_rangeFinder;
-  float displacementX;  
+  float displacementY;  
 
   // Boost boolean
   public boolean RButtonHeld = false;
@@ -111,7 +111,7 @@ public class DriveTrain extends SubsystemBase {
   // Global variable Displacement X for use elsewhere
 
   public void updateMovementMeasurement() {
-    displacementX = m_gyro.getDisplacementX();
+    displacementY = m_gyro.getDisplacementY();
     System.out.println("Update Movement Measurement");
   }
 
@@ -124,7 +124,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveToDistance() {
-    m_drive.arcadeDrive(m_distanceController.calculate(displacementX, m_distanceController.getSetpoint()), m_turnController.calculate(turnMeasurement, m_turnController.getSetpoint()));
+    m_drive.arcadeDrive(m_distanceController.calculate(displacementY, m_distanceController.getSetpoint()), m_turnController.calculate(turnMeasurement, m_turnController.getSetpoint()));
   }
 
   // Other Commands
