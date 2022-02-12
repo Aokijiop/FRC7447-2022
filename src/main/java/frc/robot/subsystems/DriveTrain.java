@@ -35,6 +35,7 @@ public class DriveTrain extends SubsystemBase {
   // Drive to Distance PID
   PIDController m_distanceController;
   Ultrasonic m_rangeFinder;
+  float displacementX;  
 
   // Boost boolean
   public boolean RButtonHeld = false;
@@ -87,6 +88,7 @@ public class DriveTrain extends SubsystemBase {
     turnMeasurement = m_gyro.getAngle();
     System.out.println("Updating angle measurement");
   }
+  
 
   public boolean atTurnSetpoint() {
     return m_turnController.atSetpoint();
@@ -100,8 +102,30 @@ public class DriveTrain extends SubsystemBase {
     m_drive.arcadeDrive(0, m_turnController.calculate(turnMeasurement, m_turnController.getSetpoint()));
   }
 
+
+
   // Drive to Distance
-  // To be added
+  public void setDriveSetpoint(double drivesetpoint) {
+    m_distanceController.setSetpoint(drivesetpoint);
+  }  
+  // Global variable Displacement X for use elsewhere
+
+  public void updateMovementMeasurement() {
+    displacementX = m_gyro.getDisplacementX();
+    System.out.println("Update Movement Measurement");
+  }
+
+  public boolean atDistanceSetpoint(){
+    return m_distanceController.atSetpoint();
+  }
+
+  public void resetDistance(){
+    m_gyro.resetDisplacement();
+  }
+
+  public void driveToDistance() {
+    m_drive.arcadeDrive(m_distanceController.calculate(displacementX, m_distanceController.getSetpoint()), m_turnController.calculate(turnMeasurement, m_turnController.getSetpoint()));
+  }
 
   // Other Commands
   // Might need to manually add a negative sign later if invert doesn't work

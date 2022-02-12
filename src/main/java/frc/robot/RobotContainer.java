@@ -13,6 +13,7 @@ import frc.robot.commands.SeqComGroupEx;
 import frc.robot.commands.BoostBoolean;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveManually;
+import frc.robot.commands.DriveToDistance;
 import frc.robot.commands.DumperIntake;
 import frc.robot.commands.DumperLower;
 import frc.robot.commands.DumperRaise;
@@ -45,6 +46,7 @@ public class RobotContainer {
   private final DumperRaise m_dumperMoveMotorUp;
   private final DumperLower m_dumperMoveMotorDown;
   private final BoostBoolean m_boost;
+  private final DriveToDistance m_driveTo10;
 
   // Turn to Angle Commands
   private final TurnToAngle m_cancelTurnTo;
@@ -101,6 +103,7 @@ public class RobotContainer {
     m_dumperMoveMotorDown = new DumperLower(m_dumper);
     m_dumperMoveMotorUp = new DumperRaise(m_dumper);
     m_boost = new BoostBoolean(m_driveTrain);
+    m_driveTo10 = new DriveToDistance(m_driveTrain, 10.0);
 
     // Turn to Angle Commands
     m_cancelTurnTo = new TurnToAngle(m_driveTrain, 0.0f);
@@ -158,6 +161,7 @@ public class RobotContainer {
     RButton.whenHeld(m_boost);
     xButton.whenHeld(m_dumperMoveMotorDown);
     aButton.whenHeld(m_dumperMoveMotorUp);
+    yButton.toggleWhenPressed(m_driveTo10);
     pov0.toggleWhenPressed(m_cancelTurnTo);
     pov45.toggleWhenPressed(m_turnTo45);
     pov90.toggleWhenPressed(m_turnTo90);
