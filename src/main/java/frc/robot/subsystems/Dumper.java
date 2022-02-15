@@ -13,13 +13,13 @@ import frc.robot.Constants;
 
 public class Dumper extends SubsystemBase {
   /** Creates a new Dumper. */
-  WPI_VictorSPX m_dumperMotor;
-  CANSparkMax m_dumperMoveMotor;
+  WPI_VictorSPX m_dumperIntakeOuttake;
+  CANSparkMax m_dumperArm;
 
 
   public Dumper() {
-    m_dumperMotor = new WPI_VictorSPX(Constants.dumperPort);
-    m_dumperMoveMotor = new CANSparkMax(Constants.dumperMovePort, MotorType.kBrushless);
+    m_dumperIntakeOuttake = new WPI_VictorSPX(Constants.dumperPort);
+    m_dumperArm = new CANSparkMax(Constants.dumperMovePort, MotorType.kBrushless);
     }
 
   @Override
@@ -27,19 +27,19 @@ public class Dumper extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void dumpingMove(double dumperVoltage) {
-    m_dumperMotor.set(ControlMode.PercentOutput, dumperVoltage);
+  public void intakeOuttake(double dumperVoltage) {
+    m_dumperIntakeOuttake.set(ControlMode.PercentOutput, dumperVoltage);
   }
 
-  public void dumperMove(double dumperUpSpeed){
-    m_dumperMoveMotor.setVoltage(dumperUpSpeed);
+  public void moveArm(double dumperUpSpeed){
+    m_dumperArm.setVoltage(dumperUpSpeed);
   }
 
-  public void stopDumper() {
-    m_dumperMotor.stopMotor();
+  public void stopIntakeOuttake() {
+    m_dumperIntakeOuttake.stopMotor();
   }
 
-  public void stopElevationDumper() {
-    m_dumperMoveMotor.stopMotor();
+  public void stopArm() {
+    m_dumperArm.stopMotor();
   }
 }

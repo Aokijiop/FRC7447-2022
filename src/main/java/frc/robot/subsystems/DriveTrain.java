@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.math.controller.PIDController;
@@ -40,7 +41,10 @@ public class DriveTrain extends SubsystemBase {
   // Boost boolean
   public boolean RButtonHeld = false;
 
-  // Turn Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
+  // Encoders
+  Encoder m_encoder;
+
+  // Left Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
   static final double kPt = 0.0;
   static final double kIt = 0.0;
   static final double kDt = 0.0;
@@ -70,6 +74,7 @@ public class DriveTrain extends SubsystemBase {
 
     m_gyro = new AHRS();
 
+    // Ultrasonic
     m_rangeFinder = new Ultrasonic(Constants.pingChannel, Constants.echoChannel);
     Ultrasonic.setAutomaticMode(true);
   }
@@ -126,6 +131,9 @@ public class DriveTrain extends SubsystemBase {
   public void driveToDistance() {
     m_drive.arcadeDrive(m_distanceController.calculate(displacementY, m_distanceController.getSetpoint()), m_turnController.calculate(turnMeasurement, m_turnController.getSetpoint()));
   }
+
+  // Odometry
+
 
   // Other Commands
   // Might need to manually add a negative sign later if invert doesn't work
