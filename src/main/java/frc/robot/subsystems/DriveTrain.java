@@ -29,7 +29,8 @@ public class DriveTrain extends SubsystemBase {
   DifferentialDrive m_drive;
 
   // Turn to Angle PID
-  PIDController m_turnController;
+  PIDController m_turnRightController;
+  PIDController m_turnLeftController;
   AHRS m_gyro;
   double turnMeasurement;
 
@@ -44,10 +45,13 @@ public class DriveTrain extends SubsystemBase {
   // Encoders
   Encoder m_encoder;
 
-  // Left Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
-  static final double kPt = 0.0;
-  static final double kIt = 0.0;
-  static final double kDt = 0.0;
+  // Turn Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
+  static final double kPtr = 0.0;
+  static final double kItr = 0.0;
+  static final double kDtr = 0.0;
+  static final double kPtl = 0.0;
+  static final double kItl = 0.0;
+  static final double kDtl = 0.0;
 
   // Distance Controller Gains - TESTING GAINS - DO NOT DEPLOY. These might be the same or slightly different from the Turn Controller gains. Assume different for now.
   static final double kPd = 0.0;
@@ -57,7 +61,8 @@ public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     // PID Controllers
-    m_turnController = new PIDController(kPt, kIt, kDt);
+    m_turnRightController = new PIDController(kPtr, kItr, kDtr);
+    m_turnLeftController = new PIDController(kPtl, kItl, kDtl);
     m_distanceController = new PIDController(kPd, kId, kDd);
 
     // Differential Drive
@@ -86,7 +91,8 @@ public class DriveTrain extends SubsystemBase {
 
   // Turn to Angle
   public void setTurnSetpoint(double setpoint) {
-    m_turnController.setSetpoint(setpoint);
+    m_turnRightController.setSetpoint(setpoint);
+    m_turnLeftController.setSetpoint(setpoint);
   }
 
   public void updateTurnMeasurement() {
@@ -96,7 +102,7 @@ public class DriveTrain extends SubsystemBase {
   
 
   public boolean atTurnSetpoint() {
-    return m_turnController.atSetpoint();
+    return m_turnRightController.atSetpoint() && m_turnLeftController.atSetpoint();
   }
 
   public void resetGyro() {
@@ -104,10 +110,9 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void turnToAngle() {
-    m_drive.arcadeDrive(0, m_turnController.calculate(turnMeasurement, m_turnController.getSetpoint()));
+    m_left.setVoltage(m_turnLeftController.calculate(turnMeasurement, m_turnLeftController.getSetpoint()));
+    m_right.setVoltage(m_turnRightController.calculate(turnMeasurement, m_turnRightController.getSetpoint()));
   }
-
-
 
   // Drive to Distance
   public void setDriveSetpoint(double drivesetpoint) {
@@ -129,7 +134,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveToDistance() {
-    m_drive.arcadeDrive(m_distanceController.calculate(displacementY, m_distanceController.getSetpoint()), m_turnController.calculate(turnMeasurement, m_turnController.getSetpoint()));
+    m_drive.arcadeDrive(m_distanceController.calculate(displacementY, m_distanceController.getSetpoint()), 0);
   }
 
   // Odometry
@@ -157,38 +162,3 @@ public class DriveTrain extends SubsystemBase {
     m_drive.stopMotor();
   }
 }
-
-/*
-░░░░░░░░░░░░░░░░██████████████████
-░░░░░░░░░░░░████░░░░░░░░░░░░░░░░░░████
-░░░░░░░░░░██░░░░░░░░░░░░░░░░░░░░░░░░░░██
-░░░░░░░░░░██░░░░░░░░░░░░░░░░░░░░░░░░░░██
-░░░░░░░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██
-░░░░░░░░██░░░░░░░░░░░░░░░░░░░░██████░░░░██ 
-░░░░░░░░██░░░░░░░░░░░░░░░░░░░░██████░░░░██ 
-░░░░░░░░██░░░░██████░░░░██░░░░██████░░░░██ 
-░░░░░░░░░░██░░░░░░░░░░██████░░░░░░░░░░██ 
-░░░░░░░░████░░██░░░░░░░░░░░░░░░░░░██░░████
-░░░░░░░░██░░░░██████████████████████░░░░██
-░░░░░░░░██░░░░░░██░░██░░██░░██░░██░░░░░░██ 
-░░░░░░░░░░████░░░░██████████████░░░░████
-░░░░░░░░██████████░░░░░░░░░░░░░░██████████
-░░░░░░██░░██████████████████████████████░░██
-░░░░████░░██░░░░██░░░░░░██░░░░░░██░░░░██░░████ 
-░░░░██░░░░░░██░░░░██████░░██████░░░░██░░░░░░██
-░░██░░░░████░░██████░░░░██░░░░██████░░████░░░░██
-░░██░░░░░░░░██░░░░██░░░░░░░░░░██░░░░██░░░░░░░░██ 
-░░██░░░░░░░░░░██░░██░░░░░░░░░░██░░██░░░░░░░░░░██ 
-░░░░██░░░░░░██░░░░████░░░░░░████░░░░██░░░░░░██ 
-░░░░░░████░░██░░░░██░░░░░░░░░░██░░░░██░░████ 
-░░░░░░░░██████░░░░██████████████░░░░██████ 
-░░░░░░░░░░████░░░░██████████████░░░░████
-░░░░░░░░██████████████████████████████████
-░░░░░░░░████████████████░░████████████████
-░░░░░░░░░░████████████░░░░░░████████████ 
-░░░░░░██████░░░░░░░░██░░░░░░██░░░░░░░░██████
-░░░░░░██░░░░░░░░░░████░░░░░░████░░░░░░░░░░██
-░░░░░░░░██████████░░░░░░░░░░░░░░██████████
-*/
-
-// snas !!!
