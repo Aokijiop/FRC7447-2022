@@ -29,7 +29,8 @@ public class DriveTrain extends SubsystemBase {
   DifferentialDrive m_drive;
 
   // Turn to Angle PID
-  PIDController m_turnController;
+  PIDController m_leftTurnController;
+  PIDController m_rightTurnController;
   AHRS m_gyro;
   double turnMeasurement;
 
@@ -49,10 +50,13 @@ public class DriveTrain extends SubsystemBase {
   Encoder m_leftEncoder;
   Encoder m_rightEncoder;
 
-  // Turn Controller Gains - TESTING GAINS - DO NOT DEPLOY. These might be the same or slightly different from the Turn Controller gains. Assume different for now.
-  static final double kPt = 0.0;
-  static final double kIt = 0.0;
-  static final double kDt = 0.0;
+  // Turn Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
+  static final double kPtr = 0.0;
+  static final double kItr = 0.0;
+  static final double kDtr = 0.0;
+  static final double kPtl = 0.0;
+  static final double kItl = 0.0;
+  static final double kDtl = 0.0;
 
   // Left Distance Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
   static final double kPl = 0.0;
@@ -67,9 +71,10 @@ public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     // PID Controllers
-    m_turnController = new PIDController(kPt, kIt, kDt);
     m_leftDistanceController = new PIDController(kPl, kIl, kDl);
     m_rightDistanceController = new PIDController(kPr, kIr, kDr);
+    m_leftTurnController = new PIDController(kPtl, kItl, kDtl);
+    m_rightTurnController = new PIDController(kPtr, kItr, kDtr);
 
     // Differential Drive
     m_leftFront = new WPI_VictorSPX(Constants.leftFront);
@@ -103,7 +108,8 @@ public class DriveTrain extends SubsystemBase {
 
   // Turn to Angle
   public void setTurnSetpoint(double setpoint) {
-    m_turnController.setSetpoint(setpoint);
+    m_leftTurnController.setSetpoint(setpoint);
+    m_rightTurnController.setSetpoint(setpoint);
   }
 
   public void updateTurnMeasurement() {
@@ -112,7 +118,7 @@ public class DriveTrain extends SubsystemBase {
   }
   
   public boolean atTurnSetpoint() {
-    return m_turnController.atSetpoint();
+    return m_leftTurnController.atSetpoint() && m_rightTurnController.atSetpoint();
   }
 
   public void resetGyro() {
@@ -120,7 +126,8 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void turnToAngle() {
-    m_drive.arcadeDrive(0, m_turnController.calculate(turnMeasurement, m_turnController.getSetpoint()));
+    m_left.setVoltage(m_leftTurnController.calculate(turnMeasurement, m_leftTurnController.getSetpoint()));
+    m_right.setVoltage(m_rightTurnController.calculate(turnMeasurement, m_rightTurnController.getSetpoint()));
   }
 
   // Drive to Distance
