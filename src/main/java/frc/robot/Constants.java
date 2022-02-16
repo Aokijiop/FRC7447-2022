@@ -24,6 +24,12 @@ public final class Constants {
     public static final int dumperPort = 7;
     public static final int dumperMovePort = 8;
 
+    // DIO Ports
+    public static final int leftEncoderA = 0;
+    public static final int leftEncoderB = 1;
+    public static final int rightEncoderA = 2;
+    public static final int rightEncoderB = 3;
+
     // Time Values for Time-Based Commands
     public static final double drive_fwd_time = 3.0;
 

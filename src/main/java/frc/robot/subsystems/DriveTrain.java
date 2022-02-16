@@ -33,32 +33,43 @@ public class DriveTrain extends SubsystemBase {
   AHRS m_gyro;
   double turnMeasurement;
 
-  // Drive to Distance PID
-  PIDController m_distanceController;
+  // Drive to Distance PID (All units in meters)
+  PIDController m_leftDistanceController;
+  PIDController m_rightDistanceController;
   Ultrasonic m_rangeFinder;
-  float displacementY;  
+  double leftDisplacement;  
+  double rightDisplacement;
+  double wheelRadius = 0.0762f;
+  double encoderResolution = 360f;
 
   // Boost boolean
   public boolean RButtonHeld = false;
 
   // Encoders
-  Encoder m_encoder;
+  Encoder m_leftEncoder;
+  Encoder m_rightEncoder;
 
-  // Left Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
+  // Turn Controller Gains - TESTING GAINS - DO NOT DEPLOY. These might be the same or slightly different from the Turn Controller gains. Assume different for now.
   static final double kPt = 0.0;
   static final double kIt = 0.0;
   static final double kDt = 0.0;
 
-  // Distance Controller Gains - TESTING GAINS - DO NOT DEPLOY. These might be the same or slightly different from the Turn Controller gains. Assume different for now.
-  static final double kPd = 0.0;
-  static final double kId = 0.0;
-  static final double kDd = 0.0;
+  // Left Distance Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
+  static final double kPl = 0.0;
+  static final double kIl = 0.0;
+  static final double kDl = 0.0;
+
+  // Right Distance Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
+  static final double kPr = 0.0;
+  static final double kIr = 0.0;
+  static final double kDr = 0.0;
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     // PID Controllers
     m_turnController = new PIDController(kPt, kIt, kDt);
-    m_distanceController = new PIDController(kPd, kId, kDd);
+    m_leftDistanceController = new PIDController(kPl, kIl, kDl);
+    m_rightDistanceController = new PIDController(kPr, kIr, kDr);
 
     // Differential Drive
     m_leftFront = new WPI_VictorSPX(Constants.leftFront);
@@ -73,6 +84,12 @@ public class DriveTrain extends SubsystemBase {
     m_drive = new DifferentialDrive(m_left, m_right);
 
     m_gyro = new AHRS();
+
+    // Encoders (All units in meters)
+    m_leftEncoder = new Encoder(Constants.leftEncoderA, Constants.leftEncoderB, false, Encoder.EncodingType.k2X);
+    m_leftEncoder.setDistancePerPulse((2 * Math.PI * wheelRadius)/encoderResolution);
+    m_rightEncoder = new Encoder(Constants.rightEncoderA, Constants.rightEncoderB, true, Encoder.EncodingType.k2X);
+    m_rightEncoder.setDistancePerPulse((2 * Math.PI * wheelRadius)/encoderResolution);
 
     // Ultrasonic
     m_rangeFinder = new Ultrasonic(Constants.pingChannel, Constants.echoChannel);
@@ -94,7 +111,6 @@ public class DriveTrain extends SubsystemBase {
     System.out.println("Updating angle measurement");
   }
   
-
   public boolean atTurnSetpoint() {
     return m_turnController.atSetpoint();
   }
@@ -107,33 +123,35 @@ public class DriveTrain extends SubsystemBase {
     m_drive.arcadeDrive(0, m_turnController.calculate(turnMeasurement, m_turnController.getSetpoint()));
   }
 
-
-
   // Drive to Distance
   public void setDriveSetpoint(double drivesetpoint) {
-    m_distanceController.setSetpoint(drivesetpoint);
+    m_leftDistanceController.setSetpoint(drivesetpoint);
+    m_rightDistanceController.setSetpoint(drivesetpoint);
   }  
-  // Global variable Displacement X for use elsewhere
 
   public void updateMovementMeasurement() {
-    displacementY = m_gyro.getDisplacementY();
+    leftDisplacement = m_leftEncoder.getDistance();
+    rightDisplacement = m_rightEncoder.getDistance();
     System.out.println("Update Movement Measurement");
   }
 
-  public boolean atDistanceSetpoint(){
-    return m_distanceController.atSetpoint();
+  public boolean atLeftDistanceSetpoint() {
+    return m_leftDistanceController.atSetpoint();
+  }
+
+  public boolean atRightDistanceSetpoint() {
+    return m_rightDistanceController.atSetpoint();
   }
 
   public void resetDistance(){
-    m_gyro.resetDisplacement();
+    m_leftEncoder.reset();
+    m_rightEncoder.reset();
   }
 
   public void driveToDistance() {
-    m_drive.arcadeDrive(m_distanceController.calculate(displacementY, m_distanceController.getSetpoint()), m_turnController.calculate(turnMeasurement, m_turnController.getSetpoint()));
+    m_left.setVoltage(m_leftDistanceController.calculate(leftDisplacement, m_leftDistanceController.getSetpoint()));
+    m_right.setVoltage(m_rightDistanceController.calculate(rightDisplacement, m_rightDistanceController.getSetpoint()));
   }
-
-  // Odometry
-
 
   // Other Commands
   // Might need to manually add a negative sign later if invert doesn't work
