@@ -16,7 +16,6 @@ public class Dumper extends SubsystemBase {
   WPI_VictorSPX m_dumperMotor;
   CANSparkMax m_dumperMoveMotor;
 
-
   public Dumper() {
     m_dumperMotor = new WPI_VictorSPX(Constants.dumperPort);
     m_dumperMoveMotor = new CANSparkMax(Constants.dumperMovePort, MotorType.kBrushless);

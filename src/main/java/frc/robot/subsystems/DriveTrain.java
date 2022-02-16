@@ -102,8 +102,6 @@ public class DriveTrain extends SubsystemBase {
     m_drive.arcadeDrive(0, m_turnController.calculate(turnMeasurement, m_turnController.getSetpoint()));
   }
 
-
-
   // Drive to Distance
   public void setDriveSetpoint(double drivesetpoint) {
     m_distanceController.setSetpoint(drivesetpoint);
