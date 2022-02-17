@@ -4,39 +4,49 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Dumper;
-import frc.robot.Constants;
 
-public class DumperLower extends CommandBase {
-  /** Creates a new DumperMoveDown. */
-  Dumper m_dumperMover;
+public class AutonLowerDumper extends CommandBase {
 
-  public DumperLower(Dumper d) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_dumperMover = d;
-    addRequirements(m_dumperMover);
-  }
+  DigitalInput bottomlimitSwitch;
+  
+    /** Creates a new AutonLowerDumper. */
+
+  Dumper m_autonlowerDumper;
+  private boolean finish;
+
+  public AutonLowerDumper(Dumper l) {
+    m_autonlowerDumper = l;
+    addRequirements(m_autonlowerDumper);
+  }    
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    finish = false;
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_dumperMover.moveArm(Constants.dumperDownSpeed);
+    m_autonlowerDumper.moveArm(-0.5);
+
+    if (bottomlimitSwitch.get()) {
+      finish = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_dumperMover.stopArm();
+    m_autonlowerDumper.stopArm();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finish;
   }
 }

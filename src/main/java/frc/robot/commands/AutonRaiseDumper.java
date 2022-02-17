@@ -12,56 +12,44 @@ import frc.robot.subsystems.Dumper;
 public class AutonRaiseDumper extends CommandBase {
 
   DigitalInput toplimitSwitch;
-  DigitalInput bottomlimitSwitch;
 
   /** Creates a new AutonDumper. */
 
-  Dumper m_autonDumper;
+  Dumper m_autonraiseDumper;
+  private boolean finish;
 
   //I'm confused as to what dumperVoltage is supposed to measure...   
   
   public AutonRaiseDumper(Dumper a) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_autonDumper = a;
-    addRequirements(m_autonDumper);
+    m_autonraiseDumper = a;
+    addRequirements(m_autonraiseDumper);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    finish = false;
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    m_autonraiseDumper.moveArm(Constants.dumperUpSpeed);
 
-
-    // if (dumperVoltage > 0) {
-    //     if (toplimitSwitch.get()) {
-    //         // We are going up and top limit is tripped so stop
-    //         m_autonDumper.stopElevationDumper();
-    //     } else {
-    //         // We are going up but top limit is not tripped so go at commanded speed
-    //         m_autonDumper.dumperMove(Constants.dumperDownSpeed);
-    //     }
-    // } else {
-    //     if (bottomlimitSwitch.get()) {
-    //         // We are going down and bottom limit is tripped so stop
-    //         m_autonDumper.stopElevationDumper();
-    //     } else {
-    //         // We are going down but bottom limit is not tripped so go at commanded speed
-    //         m_autonDumper.dumperMove(Constants.dumperDownSpeed);
-    //     }
-    // }
+    if (toplimitSwitch.get()) {
+      finish = true;
+    } 
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_autonraiseDumper.stopArm();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finish;
   }
 }
