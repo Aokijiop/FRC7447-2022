@@ -159,9 +159,8 @@ public class RobotContainer {
     LTrigger.whenHeld(m_dumperIntake);
     RTrigger.whenHeld(m_dumperVomit);
     RButton.whenHeld(m_boost);
-    xButton.whenHeld(m_dumperMoveMotorDown);
-    aButton.whenHeld(m_dumperMoveMotorUp);
-    yButton.toggleWhenPressed(m_driveTo10);
+    aButton.toggleWhenPressed(m_dumperMoveMotorDown);
+    yButton.toggleWhenPressed(m_dumperMoveMotorUp);
     pov0.toggleWhenPressed(m_cancelTurnTo);
     pov45.toggleWhenPressed(m_turnTo45);
     pov90.toggleWhenPressed(m_turnTo90);

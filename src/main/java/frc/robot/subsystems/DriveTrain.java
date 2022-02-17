@@ -50,31 +50,33 @@ public class DriveTrain extends SubsystemBase {
   Encoder m_leftEncoder;
   Encoder m_rightEncoder;
 
-  // Turn Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
-  static final double kPtr = 0.0;
-  static final double kItr = 0.0;
-  static final double kDtr = 0.0;
-  static final double kPtl = 0.0;
-  static final double kItl = 0.0;
-  static final double kDtl = 0.0;
+  // Left Turn Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
+  static final double kPlt = 0.0;
+  static final double kIlt = 0.0;
+  static final double kDlt = 0.0;
+
+  // Right Turn Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
+  static final double kPrt = 0.0;
+  static final double kIrt = 0.0;
+  static final double kDrt = 0.0;
 
   // Left Distance Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
-  static final double kPl = 0.0;
-  static final double kIl = 0.0;
-  static final double kDl = 0.0;
+  static final double kPld = 0.0;
+  static final double kIld = 0.0;
+  static final double kDld = 0.0;
 
   // Right Distance Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
-  static final double kPr = 0.0;
-  static final double kIr = 0.0;
-  static final double kDr = 0.0;
+  static final double kPrd = 0.0;
+  static final double kIrd = 0.0;
+  static final double kDrd = 0.0;
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     // PID Controllers
-    m_leftDistanceController = new PIDController(kPl, kIl, kDl);
-    m_rightDistanceController = new PIDController(kPr, kIr, kDr);
-    m_leftTurnController = new PIDController(kPtl, kItl, kDtl);
-    m_rightTurnController = new PIDController(kPtr, kItr, kDtr);
+    m_leftDistanceController = new PIDController(kPld, kIld, kDld);
+    m_rightDistanceController = new PIDController(kPrd, kIrd, kDrd);
+    m_leftTurnController = new PIDController(kPlt, kIlt, kDlt);
+    m_rightTurnController = new PIDController(kPrt, kIrt, kDrt);
 
     // Differential Drive
     m_leftFront = new WPI_VictorSPX(Constants.leftFront);
