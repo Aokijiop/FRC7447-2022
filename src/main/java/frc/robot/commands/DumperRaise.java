@@ -11,33 +11,41 @@ import frc.robot.Constants;
 
 public class DumperRaise extends CommandBase {
   /** Creates a new DumperMoveUp. */
-  Dumper m_dumperMover;
+  Dumper m_dumper;
+  private double angleSetpoint = 0.0f;
+  private boolean finish;
 
   public DumperRaise(Dumper d) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_dumperMover = d;
-    addRequirements(m_dumperMover);
+    m_dumper = d;
+    addRequirements(m_dumper);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    finish = false;
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_dumperMover.dumperMove(Constants.dumperUpSpeed);
+    m_dumper.moveArm(Constants.dumperUpSpeed);
+
+    if (m_dumper.getPosition() >= angleSetpoint) {
+      finish = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_dumperMover.stopElevationDumper();
+    m_dumper.stopArm();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finish;
   }
 }

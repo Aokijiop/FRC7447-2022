@@ -42,7 +42,7 @@ public class DriveToDistance extends CommandBase {
     m_driveTrain.driveToDistance();
     System.out.println("It do be executing tho no cap");
 
-    if (m_driveTrain.atDistanceSetpoint()) {
+    if (m_driveTrain.atLeftDistanceSetpoint()) {
       finish = true;
       System.out.println("Setpoint Reached");
     }
