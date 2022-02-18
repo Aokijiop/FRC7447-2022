@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -15,10 +16,13 @@ public class Dumper extends SubsystemBase {
   /** Creates a new Dumper. */
   WPI_VictorSPX m_dumperIntakeOuttake;
   CANSparkMax m_dumperArm;
+  RelativeEncoder m_armEncoder;
 
   public Dumper() {
     m_dumperIntakeOuttake = new WPI_VictorSPX(Constants.dumperPort);
     m_dumperArm = new CANSparkMax(Constants.dumperMovePort, MotorType.kBrushless);
+    m_armEncoder = m_dumperArm.getEncoder();
+    m_armEncoder.setPositionConversionFactor((2 * Math.PI) * (180 / Math.PI));
     }
 
   @Override
@@ -36,6 +40,10 @@ public class Dumper extends SubsystemBase {
 
   public void stopIntakeOuttake() {
     m_dumperIntakeOuttake.stopMotor();
+  }
+
+  public double getPosition() {
+    return m_armEncoder.getPosition();
   }
 
   public void stopArm() {

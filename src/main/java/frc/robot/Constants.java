@@ -63,4 +63,12 @@ public final class Constants {
     public static final int RButton = 6;
     public static final int LTrigger = 7;
     public static final int RTrigger = 8;
+
+    // Turn To Angle Velocity Setpoints
+    public static final double TTALeftVelocity = 0.0;
+    public static final double TTARightVelocity = 0.0;
+
+    // Drie to Distance Velocity Setpoints
+    public static final double DTDLeftVelocity = 0.0;
+    public static final double DTDRightVelocity = 0.0;
 }
