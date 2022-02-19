@@ -44,10 +44,6 @@ public final class Constants {
     public static final double dumperRetch = -0.5;
     public static final double dumperUpSpeed =  0.5;
     public static final double dumperDownSpeed = -0.5;
-
-    // Ultrasonic rangefinder DIO port numbers
-    public static final int pingChannel = 0;
-    public static final int echoChannel = 1;
     
     // Joystick port and axis numbers
     public static final int joystickPort = 0;
