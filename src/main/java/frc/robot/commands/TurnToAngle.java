@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
@@ -11,6 +12,7 @@ public class TurnToAngle extends CommandBase {
   DriveTrain m_driveTrain;
   double angleSetpoint;
   private boolean finish;
+  Encoder encoder;
 
   /** Creates a new TurnToAngle. */
   public TurnToAngle(DriveTrain dt, double a) {
