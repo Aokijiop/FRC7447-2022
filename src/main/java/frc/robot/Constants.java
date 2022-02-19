@@ -22,7 +22,7 @@ public final class Constants {
     public static final int leftBack = 1;
     public static final int rightBack = 3;
     public static final int dumperPort = 7;
-    public static final int dumperMovePort = 8;
+    public static final int dumperArmPort = 8;
 
     // DIO Ports
     public static final int leftEncoderA = 0;

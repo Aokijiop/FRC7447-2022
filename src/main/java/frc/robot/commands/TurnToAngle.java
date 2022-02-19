@@ -32,13 +32,14 @@ public class TurnToAngle extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTrain.updateTurnMeasurement();
-    m_driveTrain.turnToAngle();
-    System.out.println("Command executing");
-
     if (m_driveTrain.atTurnSetpoint()) {
       finish = true;
       System.out.println("Setpoint reached");
+    }
+    else {
+      m_driveTrain.updateTurnMeasurement();
+      m_driveTrain.turnToAngle();
+      System.out.println("Command executing");
     }
   }
 
