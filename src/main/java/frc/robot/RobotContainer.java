@@ -15,9 +15,10 @@ import frc.robot.commands.BoostBoolean;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveManually;
 import frc.robot.commands.DumperIntake;
-import frc.robot.commands.DumperLower;
-import frc.robot.commands.DumperRaise;
+//import frc.robot.commands.DumperLower;
+//import frc.robot.commands.DumperRaise;
 import frc.robot.commands.DumperVomit;
+import frc.robot.commands.DumperMove;
 import frc.robot.commands.HangarSideScoreAuton;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.DriveTrain;
@@ -44,8 +45,9 @@ public class RobotContainer {
   private final DriveForwardTimed m_driveForwardTimed;
   private final DumperIntake m_dumperIntake;
   private final DumperVomit m_dumperVomit;
-  private final DumperRaise m_dumperMoveMotorUp;
-  private final DumperLower m_dumperMoveMotorDown;
+  //private final DumperRaise m_dumperMoveMotorUp;
+  //private final DumperLower m_dumperMoveMotorDown;
+  private final DumperMove m_dumperMove;
   private final BoostBoolean m_boost;
 
   // Turn to Angle Commands
@@ -102,8 +104,9 @@ public class RobotContainer {
     m_driveForwardTimed.addRequirements(m_driveTrain);
     m_dumperIntake = new DumperIntake(m_dumper);
     m_dumperVomit = new DumperVomit(m_dumper);
-    m_dumperMoveMotorDown = new DumperLower(m_dumper);
-    m_dumperMoveMotorUp = new DumperRaise(m_dumper);
+    //m_dumperMoveMotorDown = new DumperLower(m_dumper);
+    //m_dumperMoveMotorUp = new DumperRaise(m_dumper);
+    m_dumperMove = new DumperMove(m_dumper);
     m_boost = new BoostBoolean(m_driveTrain);
 
     // Turn to Angle Commands
@@ -129,7 +132,7 @@ public class RobotContainer {
 
     // Controller
     m_joystick = new Joystick(Constants.joystickPort);
-    xButton = new JoystickButton(m_joystick, Constants.xButton);
+    LButton = new JoystickButton(m_joystick, Constants.xButton);
     aButton = new JoystickButton(m_joystick, Constants.aButton);
     bButton = new JoystickButton(m_joystick, Constants.bButton);
     yButton = new JoystickButton(m_joystick, Constants.yButton);
@@ -163,8 +166,9 @@ public class RobotContainer {
     LTrigger.whenHeld(m_dumperIntake);
     RTrigger.whenHeld(m_dumperVomit);
     RButton.whenHeld(m_boost);
-    aButton.toggleWhenPressed(m_dumperMoveMotorDown);
-    yButton.toggleWhenPressed(m_dumperMoveMotorUp);
+    xButton.toggleWhenPressed(m_dumperMove);
+    //aButton.toggleWhenPressed(m_dumperMoveMotorDown);
+    //yButton.toggleWhenPressed(m_dumperMoveMotorUp);
     pov0.toggleWhenPressed(m_cancelTurnTo);
     pov45.toggleWhenPressed(m_turnTo45);
     pov90.toggleWhenPressed(m_turnTo90);
