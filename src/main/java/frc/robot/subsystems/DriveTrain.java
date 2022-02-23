@@ -68,6 +68,9 @@ public class DriveTrain extends SubsystemBase {
   static final double kIrd = 0.0;
   static final double kDrd = 0.0;
 
+  // Stabilize Head While Driving Gains
+  static final double kPs = 0.0;
+
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     // PID Controllers
@@ -122,7 +125,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void turnToAngle() {
-    m_left.setVoltage(m_leftTurnController.calculate(turnMeasurement, m_leftTurnController.getSetpoint()));
+    m_left.setVoltage(-(m_leftTurnController.calculate(turnMeasurement, m_leftTurnController.getSetpoint())));
     m_right.setVoltage(m_rightTurnController.calculate(turnMeasurement, m_rightTurnController.getSetpoint()));
   }
 
@@ -152,8 +155,8 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveToDistance() {
-    m_left.setVoltage(m_leftDistanceController.calculate(leftDisplacement, m_leftDistanceController.getSetpoint()));
-    m_right.setVoltage(m_rightDistanceController.calculate(rightDisplacement, m_rightDistanceController.getSetpoint()));
+    m_left.setVoltage(m_leftDistanceController.calculate(leftDisplacement, m_leftDistanceController.getSetpoint()) + m_leftTurnController.calculate(turnMeasurement, m_leftTurnController.getSetpoint()));
+    m_right.setVoltage(m_rightDistanceController.calculate(rightDisplacement, m_rightDistanceController.getSetpoint()) + m_rightTurnController.calculate(turnMeasurement, m_rightTurnController.getSetpoint()));
   }
 
   // Other Commands

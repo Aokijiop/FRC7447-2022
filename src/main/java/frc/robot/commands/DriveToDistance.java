@@ -37,7 +37,7 @@ public class DriveToDistance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_driveTrain.atLeftDistanceSetpoint()) {
+    if (m_driveTrain.atLeftDistanceSetpoint() && m_driveTrain.atRightDistanceSetpoint()) {
       finish = true;
       System.out.println("Setpoint Reached");
     }
