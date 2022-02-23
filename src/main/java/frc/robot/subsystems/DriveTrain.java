@@ -10,6 +10,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -40,9 +41,16 @@ public class DriveTrain extends SubsystemBase {
   double wheelRadius = 0.0762f;
   double encoderResolution = 360f;
 
-  // Boost boolean
+  // Boost Boolean
   public boolean RButtonHeld = false;
 
+  // TTA Feedforward
+  SimpleMotorFeedforward m_turnFeedforward; 
+
+  // DTD Feedforward
+  SimpleMotorFeedforward m_leftDTDFeedforward;
+  SimpleMotorFeedforward m_rightDTDFeedforward;
+  
   // Encoders
   Encoder m_leftEncoder;
   Encoder m_rightEncoder;
@@ -51,6 +59,18 @@ public class DriveTrain extends SubsystemBase {
   static final double kPt = 0.0;
   static final double kIt = 0.0;
   static final double kDt = 0.0;
+  
+  // Turn Feedforward Gains
+  static final double kSt = 0.0;
+  static final double kVt = 0.0;
+
+  // Left DTT Feedfoward Gains
+  static final double kSld = 0.0;
+  static final double kVld = 0.0;
+
+  // Right DTT Feedfoward Gains
+  static final double kSrd = 0.0;
+  static final double kVrd = 0.0;
 
   // Left Distance Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
   static final double kPld = 0.0;
@@ -62,9 +82,6 @@ public class DriveTrain extends SubsystemBase {
   static final double kIrd = 0.0;
   static final double kDrd = 0.0;
 
-  // Stabilize Head While Driving Gains
-  static final double kPs = 0.0;
-
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     // PID Controllers
@@ -72,9 +89,14 @@ public class DriveTrain extends SubsystemBase {
     m_rightDistanceController = new PIDController(kPrd, kIrd, kDrd);
     m_turnController = new PIDController(kPt, kIt, kDt);
 
+    // Feedforward Controllers
+    m_turnFeedforward = new SimpleMotorFeedforward(kSt, kVt);
+    m_rightDTDFeedforward = new SimpleMotorFeedforward(kSrd, kVrd);
+    m_leftDTDFeedforward = new SimpleMotorFeedforward(kSld, kVld);
+
     // Differential Drive
     m_leftFront = new WPI_VictorSPX(Constants.leftFront);
-    m_leftBack = new WPI_VictorSPX(Constants.leftBack);
+    m_leftBack = new WPI_VictorSPX(Constants.leftBack); 
     m_rightFront = new WPI_VictorSPX(Constants.rightFront);
     m_rightBack = new WPI_VictorSPX(Constants.rightBack);
 
