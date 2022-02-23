@@ -37,14 +37,15 @@ public class DriveToDistance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTrain.updateMovementMeasurement();
-    m_driveTrain.updateTurnMeasurement();
-    m_driveTrain.driveToDistance();
-    System.out.println("It do be executing tho no cap");
-
     if (m_driveTrain.atLeftDistanceSetpoint()) {
       finish = true;
       System.out.println("Setpoint Reached");
+    }
+    else {
+      m_driveTrain.updateMovementMeasurement();
+      m_driveTrain.updateTurnMeasurement();
+      m_driveTrain.driveToDistance();
+      System.out.println("It do be executing tho no cap");
     }
   }
 

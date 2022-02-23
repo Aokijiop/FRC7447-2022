@@ -8,15 +8,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Dumper;
 import frc.robot.Constants;
 
-
-public class DumperRaise extends CommandBase {
-  /** Creates a new DumperMoveUp. */
+public class DumperMove extends CommandBase {
+  /** Creates a new DumperRaiseLower. */
   Dumper m_dumper;
-  private double angleSetpoint = 0.0f;
   private boolean finish;
+  private boolean armUp = true;
+  private double angleSetpoint = 0.0f;
 
-  public DumperRaise(Dumper d) {
+
+  public DumperMove(Dumper d) {
     // Use addRequirements() here to declare subsystem dependencies.
+
     m_dumper = d;
     addRequirements(m_dumper);
   }
@@ -25,16 +27,33 @@ public class DumperRaise extends CommandBase {
   @Override
   public void initialize() {
     finish = false;
+    System.out.println("initialized move");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_dumper.getPosition() >= angleSetpoint) {
-      finish = true;
+    // moves dumper up
+    if(!armUp) {
+        if (m_dumper.getPosition() >= angleSetpoint) {
+            finish = true;
+            armUp = true;
+          }
+          else {
+            m_dumper.moveArm(Constants.dumperUpSpeed);
+            System.out.println("Moving upppp");
+          }
     }
-    else {
-      m_dumper.moveArm(Constants.dumperUpSpeed);
+    //moves dumper down
+    if(armUp) {
+        if (m_dumper.getPosition() <= -375.0f) {
+            finish = true;
+            armUp = false;
+          }
+          else {
+            m_dumper.moveArm(Constants.dumperDownSpeed);
+            System.out.println("moving downnnnnn!!");
+          }
     }
   }
 
@@ -42,7 +61,9 @@ public class DumperRaise extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_dumper.stopArm();
+    System.out.println("Finished!!");
   }
+
 
   // Returns true when the command should end.
   @Override
@@ -50,3 +71,4 @@ public class DumperRaise extends CommandBase {
     return finish;
   }
 }
+

@@ -4,45 +4,40 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Dumper;
-import frc.robot.Constants;
 
-
-public class DumperRaise extends CommandBase {
-  /** Creates a new DumperMoveUp. */
-  Dumper m_dumper;
-  private double angleSetpoint = 0.0f;
+public class Wait extends CommandBase {
+  Timer m_timer;
+  double waitTime;
   private boolean finish;
 
-  public DumperRaise(Dumper d) {
+  /** Creates a new Wait. */
+  public Wait(double w) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_dumper = d;
-    addRequirements(m_dumper);
+    m_timer = new Timer();
+    waitTime = w;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_timer.reset();
+    m_timer.start();
     finish = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_dumper.getPosition() >= angleSetpoint) {
+    if (m_timer.get() >= waitTime) {
       finish = true;
-    }
-    else {
-      m_dumper.moveArm(Constants.dumperUpSpeed);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_dumper.stopArm();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

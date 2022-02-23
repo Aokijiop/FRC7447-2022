@@ -9,7 +9,6 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -38,7 +37,6 @@ public class DriveTrain extends SubsystemBase {
   // Drive to Distance PID (All units in meters)
   PIDController m_leftDistanceController;
   PIDController m_rightDistanceController;
-  Ultrasonic m_rangeFinder;
   double leftDisplacement;  
   double rightDisplacement;
   double wheelRadius = 0.0762f;
@@ -128,10 +126,6 @@ public class DriveTrain extends SubsystemBase {
     m_leftEncoder.setDistancePerPulse((2 * Math.PI * wheelRadius)/encoderResolution);
     m_rightEncoder = new Encoder(Constants.rightEncoderA, Constants.rightEncoderB, true, Encoder.EncodingType.k2X);
     m_rightEncoder.setDistancePerPulse((2 * Math.PI * wheelRadius)/encoderResolution);
-
-    // Ultrasonic
-    m_rangeFinder = new Ultrasonic(Constants.pingChannel, Constants.echoChannel);
-    Ultrasonic.setAutomaticMode(true);
   }
 
   @Override
@@ -222,7 +216,7 @@ public class DriveTrain extends SubsystemBase {
 
 /*
 ░░░░░░░░░░░░░░░░██████████████████
-░░░░░░░░░░░░████░░░░░░░░░░░░░░░░░░████
+░░░░░░░░░░░░████░░░░░░░░░░░░░░░░░░█░██
 ░░░░░░░░░░██░░░░░░░░░░░░░░░░░░░░░░░░░░██
 ░░░░░░░░░░██░░░░░░░░░░░░░░░░░░░░░░░░░░██
 ░░░░░░░░██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██
@@ -232,7 +226,7 @@ public class DriveTrain extends SubsystemBase {
 ░░░░░░░░░░██░░░░░░░░░░██████░░░░░░░░░░██ 
 ░░░░░░░░████░░██░░░░░░░░░░░░░░░░░░██░░████
 ░░░░░░░░██░░░░██████████████████████░░░░██
-░░░░░░░░██░░░░░░██░░██░░██░░██░░██░░░░░░██ 
+░░░░░░░░██░░░░░░██░░██░░██░░██░░░░░░░█████
 ░░░░░░░░░░████░░░░██████████████░░░░████
 ░░░░░░░░██████████░░░░░░░░░░░░░░██████████
 ░░░░░░██░░██████████████████████████████░░██

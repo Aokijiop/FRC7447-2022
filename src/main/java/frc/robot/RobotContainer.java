@@ -10,14 +10,16 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.SeqComGroupEx;
+import frc.robot.commands.TerminalSideScoreAuton;
 import frc.robot.commands.BoostBoolean;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveManually;
-import frc.robot.commands.DriveToDistance;
 import frc.robot.commands.DumperIntake;
-import frc.robot.commands.DumperLower;
-import frc.robot.commands.DumperRaise;
+//import frc.robot.commands.DumperLower;
+//import frc.robot.commands.DumperRaise;
 import frc.robot.commands.DumperVomit;
+import frc.robot.commands.DumperMove;
+import frc.robot.commands.HangarSideScoreAuton;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Dumper;
@@ -43,10 +45,10 @@ public class RobotContainer {
   private final DriveForwardTimed m_driveForwardTimed;
   private final DumperIntake m_dumperIntake;
   private final DumperVomit m_dumperVomit;
-  private final DumperRaise m_dumperMoveMotorUp;
-  private final DumperLower m_dumperMoveMotorDown;
+  //private final DumperRaise m_dumperMoveMotorUp;
+  //private final DumperLower m_dumperMoveMotorDown;
+  private final DumperMove m_dumperMove;
   private final BoostBoolean m_boost;
-  private final DriveToDistance m_driveTo10;
 
   // Turn to Angle Commands
   private final TurnToAngle m_cancelTurnTo;
@@ -60,6 +62,8 @@ public class RobotContainer {
 
   // Autonomous Commands
   private final SeqComGroupEx m_autonOne;
+  private final TerminalSideScoreAuton m_terminalSideScoreAuton;
+  private final HangarSideScoreAuton m_hangarSideScoreAuton;
 
   // Autonomous Command Chooser
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -100,10 +104,10 @@ public class RobotContainer {
     m_driveForwardTimed.addRequirements(m_driveTrain);
     m_dumperIntake = new DumperIntake(m_dumper);
     m_dumperVomit = new DumperVomit(m_dumper);
-    m_dumperMoveMotorDown = new DumperLower(m_dumper);
-    m_dumperMoveMotorUp = new DumperRaise(m_dumper);
+    //m_dumperMoveMotorDown = new DumperLower(m_dumper);
+    //m_dumperMoveMotorUp = new DumperRaise(m_dumper);
+    m_dumperMove = new DumperMove(m_dumper);
     m_boost = new BoostBoolean(m_driveTrain);
-    m_driveTo10 = new DriveToDistance(m_driveTrain, 10.0);
 
     // Turn to Angle Commands
     m_cancelTurnTo = new TurnToAngle(m_driveTrain, 0.0f);
@@ -117,15 +121,18 @@ public class RobotContainer {
 
     // Autonomous Commands
     m_autonOne = new SeqComGroupEx(m_driveTrain, m_dumper);
+    m_terminalSideScoreAuton = new TerminalSideScoreAuton(m_driveTrain, m_dumper);
+    m_hangarSideScoreAuton = new HangarSideScoreAuton(m_driveTrain, m_dumper);
     
     // Autonomous Command Chooser
-    m_chooser.setDefaultOption("AutonOne", m_autonOne);
-    // m_chooser.addOption("AutonTwo", m_autonTwo);
+    m_chooser.setDefaultOption("Auton One", m_autonOne);
+    m_chooser.addOption("Terminal Side Score", m_terminalSideScoreAuton);
+    m_chooser.addOption("Hangar Side Score", m_hangarSideScoreAuton);
     SmartDashboard.putData("Autonomous", m_chooser);
 
     // Controller
     m_joystick = new Joystick(Constants.joystickPort);
-    xButton = new JoystickButton(m_joystick, Constants.xButton);
+    LButton = new JoystickButton(m_joystick, Constants.xButton);
     aButton = new JoystickButton(m_joystick, Constants.aButton);
     bButton = new JoystickButton(m_joystick, Constants.bButton);
     yButton = new JoystickButton(m_joystick, Constants.yButton);
@@ -159,8 +166,9 @@ public class RobotContainer {
     LTrigger.whenHeld(m_dumperIntake);
     RTrigger.whenHeld(m_dumperVomit);
     RButton.whenHeld(m_boost);
-    aButton.toggleWhenPressed(m_dumperMoveMotorDown);
-    yButton.toggleWhenPressed(m_dumperMoveMotorUp);
+    xButton.toggleWhenPressed(m_dumperMove);
+    //aButton.toggleWhenPressed(m_dumperMoveMotorDown);
+    //yButton.toggleWhenPressed(m_dumperMoveMotorUp);
     pov0.toggleWhenPressed(m_cancelTurnTo);
     pov45.toggleWhenPressed(m_turnTo45);
     pov90.toggleWhenPressed(m_turnTo90);
