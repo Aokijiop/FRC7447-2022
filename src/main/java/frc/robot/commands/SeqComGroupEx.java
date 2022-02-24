@@ -16,7 +16,7 @@ public class SeqComGroupEx extends SequentialCommandGroup {
   public SeqComGroupEx(DriveTrain dt, Dumper d) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new DriveForwardTimed(dt), new DumperVomit(d));
+    addCommands(new DriveTimed(dt, 0.3, 3.0), new DumperVomit(d));
     //Dumper vomit wouldn't work here, since it's binded to a button, but put other auton commands in this format
     // - addCommands(new *insertcommandhere()*, new *insertcommandhere()*)
     // For any parameters, add it with the subsystem in the public area bit 

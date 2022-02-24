@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.SeqComGroupEx;
 import frc.robot.commands.TerminalSideScoreAuton;
 import frc.robot.commands.BoostBoolean;
-import frc.robot.commands.DriveForwardTimed;
+import frc.robot.commands.DriveTimed;
 import frc.robot.commands.DriveManually;
 import frc.robot.commands.DumperIntake;
 //import frc.robot.commands.DumperLower;
@@ -43,7 +43,7 @@ public class RobotContainer {
 
   // Commands
   private final DriveManually m_driveManually;
-  private final DriveForwardTimed m_driveForwardTimed;
+  private final DriveTimed m_driveForwardTimed;
   private final DumperIntake m_dumperIntake;
   private final DumperVomit m_dumperVomit;
   //private final DumperRaise m_dumperMoveMotorUp;
@@ -102,7 +102,7 @@ public class RobotContainer {
     m_driveManually = new DriveManually(m_driveTrain);
     m_driveManually.addRequirements(m_driveTrain);
     m_driveTrain.setDefaultCommand(m_driveManually);
-    m_driveForwardTimed = new DriveForwardTimed(m_driveTrain);
+    m_driveForwardTimed = new DriveTimed(m_driveTrain, Constants.autonSpeed, Constants.drive_fwd_time);
     m_driveForwardTimed.addRequirements(m_driveTrain);
     m_dumperIntake = new DumperIntake(m_dumper);
     m_dumperVomit = new DumperVomit(m_dumper);

@@ -186,7 +186,7 @@ public class DriveTrain extends SubsystemBase {
     RButtonHeld = false;
   }
 
-  public void driveForward(double speed) {
+  public void driveTimed(double speed) {
     m_drive.arcadeDrive(speed, 0);
   }
 

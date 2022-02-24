@@ -6,18 +6,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
-public class DriveForwardTimed extends CommandBase {
+public class DriveTimed extends CommandBase {
   DriveTrain m_driveTrain;
   private boolean finish;
+  double driveSpeed;
+  double time;
   Timer timer;
 
   /** Creates a new DriveForwardTimed. */
-  public DriveForwardTimed(DriveTrain dt) {
+  public DriveTimed(DriveTrain dt, double ds, double t) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_driveTrain = dt;
+    driveSpeed = ds;
+    time = t;
     addRequirements(m_driveTrain);
     timer = new Timer();
   }
@@ -34,9 +37,9 @@ public class DriveForwardTimed extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTrain.driveForward(Constants.autonSpeed);
+    m_driveTrain.driveTimed(driveSpeed);
     System.out.println("Driving forward");
-    if (timer.get() >= Constants.drive_fwd_time) {
+    if (timer.get() >= time) {
       finish  = true;
       System.out.println("Time setpoint reached");
       timer.stop();
