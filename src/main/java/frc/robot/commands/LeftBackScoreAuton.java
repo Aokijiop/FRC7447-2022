@@ -11,14 +11,15 @@ import frc.robot.subsystems.Dumper;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class HangarSideScoreAuton extends SequentialCommandGroup {
+public class LeftBackScoreAuton extends SequentialCommandGroup {
   Wait m_wait;
 
-  /** Creates a new HangarSideScoreAuton. */
-  public HangarSideScoreAuton(DriveTrain dt, Dumper d) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    m_wait = new Wait(5.0f);
-    addCommands(new DumperVomit(d).raceWith(m_wait), new DumperLower(d), new TurnToAngle(dt, 180.0f), new DriveToDistance(dt, 2.9464));
+  public LeftBackScoreAuton(DriveTrain dt, Dumper d) {
+    m_wait = new Wait(5);         // creates a new wait object
+
+    addCommands(new DriveToDistance(dt, 5.0), new TurnToAngle(dt, 6), new DumperVomit(d).raceWith(m_wait), new DriveToDistance(dt, -6.0));
+    // drives to center from back of tarmac, dumps ball into center, drives off of tarmac from center
+    // static values are not definite; just random bullshit lol
+    // this is legit a copy-paste of RightBackScoreAuton lmfaooo
   }
 }

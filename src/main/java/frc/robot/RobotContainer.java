@@ -18,8 +18,9 @@ import frc.robot.commands.DumperIntake;
 //import frc.robot.commands.DumperLower;
 //import frc.robot.commands.DumperRaise;
 import frc.robot.commands.DumperVomit;
+import frc.robot.commands.LeftBackScoreAuton;
 import frc.robot.commands.DumperMove;
-import frc.robot.commands.HangarSideScoreAuton;
+import frc.robot.commands.RightBackScoreAuton;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Dumper;
@@ -63,7 +64,8 @@ public class RobotContainer {
   // Autonomous Commands
   private final SeqComGroupEx m_autonOne;
   private final TerminalSideScoreAuton m_terminalSideScoreAuton;
-  private final HangarSideScoreAuton m_hangarSideScoreAuton;
+  private final RightBackScoreAuton m_rBackScoreAuton;
+  private final LeftBackScoreAuton m_lBackScoreAuton;
 
   // Autonomous Command Chooser
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -122,12 +124,13 @@ public class RobotContainer {
     // Autonomous Commands
     m_autonOne = new SeqComGroupEx(m_driveTrain, m_dumper);
     m_terminalSideScoreAuton = new TerminalSideScoreAuton(m_driveTrain, m_dumper);
-    m_hangarSideScoreAuton = new HangarSideScoreAuton(m_driveTrain, m_dumper);
+    m_rBackScoreAuton = new RightBackScoreAuton(m_driveTrain, m_dumper);
+    m_lBackScoreAuton = new LeftBackScoreAuton(m_driveTrain, m_dumper);
     
     // Autonomous Command Chooser
-    m_chooser.setDefaultOption("Auton One", m_autonOne);
-    m_chooser.addOption("Terminal Side Score", m_terminalSideScoreAuton);
-    m_chooser.addOption("Hangar Side Score", m_hangarSideScoreAuton);
+    m_chooser.setDefaultOption("Terminal Side Score", m_terminalSideScoreAuton);
+    m_chooser.addOption("Right Back Score", m_rBackScoreAuton);
+    m_chooser.addOption("Left Back Score", m_lBackScoreAuton);
     SmartDashboard.putData("Autonomous", m_chooser);
 
     // Controller
