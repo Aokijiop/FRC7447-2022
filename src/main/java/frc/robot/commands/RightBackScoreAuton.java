@@ -11,10 +11,10 @@ import frc.robot.subsystems.Dumper;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class TerminalBackScoreAuton extends SequentialCommandGroup {
+public class RightBackScoreAuton extends SequentialCommandGroup {
   Wait m_wait;
 
-  public TerminalBackScoreAuton(DriveTrain dt, Dumper d) {
+  public RightBackScoreAuton(DriveTrain dt, Dumper d) {
     m_wait = new Wait(5);         // creates a new wait object
 
     addCommands(new DriveToDistance(dt, 5.0), new TurnToAngle(dt, 6), new DumperVomit(d).raceWith(m_wait), new DriveToDistance(dt, -6.0));
