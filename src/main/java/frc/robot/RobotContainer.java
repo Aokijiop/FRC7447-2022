@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.SeqComGroupEx;
-import frc.robot.commands.FrontScoreAuton;
+import frc.robot.commands.HubScoreAuton;
 import frc.robot.commands.BoostBoolean;
 import frc.robot.commands.DriveTimed;
 import frc.robot.commands.DriveManually;
@@ -65,7 +65,7 @@ public class RobotContainer {
 
   // Autonomous Commands
   private final SeqComGroupEx m_autonOne;
-  private final FrontScoreAuton m_terminalSideScoreAuton;
+  private final HubScoreAuton m_terminalSideScoreAuton;
   private final RightBackScoreAuton m_rBackScoreAuton;
   private final LeftBackScoreAuton m_lBackScoreAuton;
 
@@ -126,7 +126,7 @@ public class RobotContainer {
 
     // Autonomous Commands
     m_autonOne = new SeqComGroupEx(m_driveTrain, m_dumper);
-    m_terminalSideScoreAuton = new FrontScoreAuton(m_driveTrain, m_dumper);
+    m_terminalSideScoreAuton = new HubScoreAuton(m_driveTrain, m_dumper);
     m_rBackScoreAuton = new RightBackScoreAuton(m_driveTrain, m_dumper);
     m_lBackScoreAuton = new LeftBackScoreAuton(m_driveTrain, m_dumper);
     
