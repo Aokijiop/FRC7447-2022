@@ -1,6 +1,7 @@
 {
   "SysId": {
     "Analysis Type": "Drivetrain",
-    "mode": "Client"
+    "mode": "Client",
+    "serverTeam": "7447"
   }
 }

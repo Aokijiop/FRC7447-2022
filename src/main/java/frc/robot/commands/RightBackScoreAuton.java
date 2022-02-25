@@ -15,9 +15,9 @@ public class RightBackScoreAuton extends SequentialCommandGroup {
   Wait m_wait;
 
   public RightBackScoreAuton(DriveTrain dt, Dumper d) {
-    m_wait = new Wait(5);         // creates a new wait object
+    m_wait = new Wait(5.0f);         // creates a new wait object
 
-    addCommands(new DriveToDistance(dt, 5.0), new TurnToAngle(dt, 6), new DumperVomit(d).raceWith(m_wait), new DriveToDistance(dt, -6.0));
+    addCommands(new DriveToDistance(dt, 1.80f), new TurnToAngle(dt, 15.0f), new DumperVomit(d).raceWith(m_wait), new DriveToDistance(dt, -4.0f));
     // drives to center from back of tarmac, dumps ball into center, drives off of tarmac from center
     // static values are not definite; just random bullshit lol
   }

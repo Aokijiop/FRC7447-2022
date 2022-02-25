@@ -37,13 +37,13 @@ public final class Constants {
     public static final double mSpeed = 0.6;
     public static final double tSpeed = 0.6;
     public static final double speedBoost = 0.85;
-    public static final double autonSpeed = 0.4;
+    public static final double autonSpeed = 0.1;
 
     // Dumper Constants
-    public static final double dumperPower = 0.5;
-    public static final double dumperRetch = -0.5;
-    public static final double dumperUpSpeed =  0.5;
-    public static final double dumperDownSpeed = -0.5;
+    public static final double dumperPower = 0.95;
+    public static final double dumperRetch = -0.95;
+    public static final double dumperUpSpeed =  0.30;
+    public static final double dumperDownSpeed = -0.30;
     
     // Joystick port and axis numbers
     public static final int joystickPort = 0;

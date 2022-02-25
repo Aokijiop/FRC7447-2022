@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.SeqComGroupEx;
-import frc.robot.commands.TerminalSideScoreAuton;
+import frc.robot.commands.FrontScoreAuton;
 import frc.robot.commands.BoostBoolean;
 import frc.robot.commands.DriveTimed;
 import frc.robot.commands.DriveManually;
@@ -20,6 +20,7 @@ import frc.robot.commands.DumperIntake;
 import frc.robot.commands.DumperVomit;
 import frc.robot.commands.LeftBackScoreAuton;
 import frc.robot.commands.DumperMove;
+import frc.robot.commands.DumperTest;
 import frc.robot.commands.RightBackScoreAuton;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.DriveTrain;
@@ -50,6 +51,7 @@ public class RobotContainer {
   //private final DumperLower m_dumperMoveMotorDown;
   private final DumperMove m_dumperMove;
   private final BoostBoolean m_boost;
+  private final DumperTest m_dumperTest;
 
   // Turn to Angle Commands
   private final TurnToAngle m_cancelTurnTo;
@@ -63,7 +65,7 @@ public class RobotContainer {
 
   // Autonomous Commands
   private final SeqComGroupEx m_autonOne;
-  private final TerminalSideScoreAuton m_terminalSideScoreAuton;
+  private final FrontScoreAuton m_terminalSideScoreAuton;
   private final RightBackScoreAuton m_rBackScoreAuton;
   private final LeftBackScoreAuton m_lBackScoreAuton;
 
@@ -110,6 +112,7 @@ public class RobotContainer {
     //m_dumperMoveMotorUp = new DumperRaise(m_dumper);
     m_dumperMove = new DumperMove(m_dumper);
     m_boost = new BoostBoolean(m_driveTrain);
+    m_dumperTest = new DumperTest(m_dumper);
 
     // Turn to Angle Commands
     m_cancelTurnTo = new TurnToAngle(m_driveTrain, 0.0f);
@@ -123,7 +126,7 @@ public class RobotContainer {
 
     // Autonomous Commands
     m_autonOne = new SeqComGroupEx(m_driveTrain, m_dumper);
-    m_terminalSideScoreAuton = new TerminalSideScoreAuton(m_driveTrain, m_dumper);
+    m_terminalSideScoreAuton = new FrontScoreAuton(m_driveTrain, m_dumper);
     m_rBackScoreAuton = new RightBackScoreAuton(m_driveTrain, m_dumper);
     m_lBackScoreAuton = new LeftBackScoreAuton(m_driveTrain, m_dumper);
     
@@ -170,8 +173,7 @@ public class RobotContainer {
     RTrigger.whenHeld(m_dumperVomit);
     RButton.whenHeld(m_boost);
     LButton.toggleWhenPressed(m_dumperMove);
-    //aButton.toggleWhenPressed(m_dumperMoveMotorDown);
-    //yButton.toggleWhenPressed(m_dumperMoveMotorUp);
+    aButton.toggleWhenPressed(m_dumperTest);
     pov0.toggleWhenPressed(m_cancelTurnTo);
     pov45.toggleWhenPressed(m_turnTo45);
     pov90.toggleWhenPressed(m_turnTo90);

@@ -19,6 +19,6 @@ public class TimerTerminalSideScoreAuton extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     m_wait = new Wait(3.0f);
-    addCommands(new DumperVomit(d).raceWith(m_wait), new DumperMove(d), new DriveTimed(dt, -0.3, 5.0));
+    addCommands(new DumperVomit(d).raceWith(m_wait), new DumperMove(d), new DriveTimed(dt, -0.3f, 5.0f));
   }
 }
