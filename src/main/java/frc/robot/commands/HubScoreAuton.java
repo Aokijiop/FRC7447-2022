@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Dumper;
@@ -20,5 +21,6 @@ public class HubScoreAuton extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     m_wait = new Wait(3.0f);
     addCommands(new DumperVomit(d).raceWith(m_wait), new DumperLower(d), new TurnToAngle(dt, 180.0f), new DriveToDistance(dt, 2.9464));
+    addCommands(new DumperVomit(d).raceWith(m_wait), new ParallelCommandGroup(new DumperLower(d), new TurnToAngle(dt, 180.0f)), new DriveToDistance(dt, 2.9464));
   }
 }

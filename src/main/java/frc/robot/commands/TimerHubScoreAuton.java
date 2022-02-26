@@ -11,11 +11,11 @@ import frc.robot.subsystems.Dumper;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class TimerTerminalSideScoreAuton extends SequentialCommandGroup {
+public class TimerHubScoreAuton extends SequentialCommandGroup {
   Wait m_wait;
 
   /** Creates a new TimerTerminalSideScoreAuton. */
-  public TimerTerminalSideScoreAuton(Dumper d, DriveTrain dt) {
+  public TimerHubScoreAuton(Dumper d, DriveTrain dt) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     m_wait = new Wait(3.0f);
