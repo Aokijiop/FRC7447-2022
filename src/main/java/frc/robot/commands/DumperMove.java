@@ -12,13 +12,13 @@ public class DumperMove extends CommandBase {
   /** Creates a new DumperRaiseLower. */
   Dumper m_dumper;
   private boolean finish;
-  private boolean armUp = true;
+  private boolean armUp;
   private double angleSetpoint = 0.0f;
 
 
   public DumperMove(Dumper d) {
     // Use addRequirements() here to declare subsystem dependencies.
-
+    armUp = true;
     m_dumper = d;
     addRequirements(m_dumper);
   }

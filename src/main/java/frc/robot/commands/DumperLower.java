@@ -17,7 +17,6 @@ public class DumperLower extends CommandBase {
   public DumperLower(Dumper d) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_dumper = d;
-    addRequirements(m_dumper);
   }
 
   // Called when the command is initially scheduled.
@@ -29,12 +28,12 @@ public class DumperLower extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_dumper.getPosition() <= angleTarget) {
-      finish = true;
-    }
-    else {
+    // if (m_dumper.getPosition() <= angleTarget) {
+    //   finish = true;
+    // }
+    // else {
       m_dumper.moveArm(Constants.dumperDownSpeed);
-    }
+    // }
   }
 
   // Called once the command ends or is interrupted.

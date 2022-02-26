@@ -30,7 +30,7 @@ public class DriveManually extends CommandBase {
     if (!m_driveTrain.RButtonHeld) {
       m_driveTrain.driveManually(RobotContainer.m_joystick, Constants.mSpeed, Constants.tSpeed);
     } else {
-      m_driveTrain.driveManually(RobotContainer.m_joystick, Constants.speedBoost, Constants.tSpeed);
+      m_driveTrain.driveManually(RobotContainer.m_joystick, Constants.speedBoost, Constants.speedBoost);
     }
     SmartDashboard.putNumber("Movement speed", RobotContainer.m_joystick.getRawAxis(Constants.y_axis));
 

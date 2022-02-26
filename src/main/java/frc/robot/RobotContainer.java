@@ -14,11 +14,13 @@ import frc.robot.commands.BoostBoolean;
 import frc.robot.commands.DriveTimed;
 import frc.robot.commands.DriveManually;
 import frc.robot.commands.DumperIntake;
+import frc.robot.commands.DumperLower;
 //import frc.robot.commands.DumperLower;
 //import frc.robot.commands.DumperRaise;
 import frc.robot.commands.DumperVomit;
 import frc.robot.commands.LeftBackScoreAuton;
 import frc.robot.commands.DumperMove;
+import frc.robot.commands.DumperRaise;
 import frc.robot.commands.DumperTest;
 import frc.robot.commands.RightBackScoreAuton;
 import frc.robot.commands.TurnToAngle;
@@ -46,8 +48,8 @@ public class RobotContainer {
   private final DriveTimed m_driveForwardTimed;
   private final DumperIntake m_dumperIntake;
   private final DumperVomit m_dumperVomit;
-  //private final DumperRaise m_dumperMoveMotorUp;
-  //private final DumperLower m_dumperMoveMotorDown;
+  private final DumperRaise m_dumperMoveMotorUp;
+  private final DumperLower m_dumperMoveMotorDown;
   private final DumperMove m_dumperMove;
   private final BoostBoolean m_boost;
   private final DumperTest m_dumperTest;
@@ -106,8 +108,8 @@ public class RobotContainer {
     m_driveForwardTimed.addRequirements(m_driveTrain);
     m_dumperIntake = new DumperIntake(m_dumper);
     m_dumperVomit = new DumperVomit(m_dumper);
-    //m_dumperMoveMotorDown = new DumperLower(m_dumper);
-    //m_dumperMoveMotorUp = new DumperRaise(m_dumper);
+    m_dumperMoveMotorDown = new DumperLower(m_dumper);
+    m_dumperMoveMotorUp = new DumperRaise(m_dumper);
     m_dumperMove = new DumperMove(m_dumper);
     m_boost = new BoostBoolean(m_driveTrain);
     m_dumperTest = new DumperTest(m_dumper);
@@ -165,20 +167,22 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    bButton.toggleWhenPressed(m_driveForwardTimed, false);
+    // bButton.toggleWhenPressed(m_driveForwardTimed, false);
     LTrigger.whenHeld(m_dumperIntake);
     RTrigger.whenHeld(m_dumperVomit);
     RButton.whenHeld(m_boost);
-    LButton.toggleWhenPressed(m_dumperMove);
-    aButton.toggleWhenPressed(m_dumperTest);
-    pov0.toggleWhenPressed(m_cancelTurnTo);
-    pov45.toggleWhenPressed(m_turnTo45);
-    pov90.toggleWhenPressed(m_turnTo90);
-    pov135.toggleWhenPressed(m_turnTo135);
-    pov180.toggleWhenPressed(m_turnTo180);
-    pov225.toggleWhenPressed(m_turnTo45cc);
-    pov270.toggleWhenPressed(m_turnTo90cc);
-    pov315.toggleWhenPressed(m_turnTo135cc);
+    LButton.toggleWhenPressed(m_dumperMoveMotorUp);
+    // yButton.whenHeld(m_dumperMoveMotorUp);
+    aButton.toggleWhenPressed(m_dumperMoveMotorDown);
+    // aButton.toggleWhenPressed(m_dumperTest);
+    // pov0.toggleWhenPressed(m_cancelTurnTo);
+    // pov45.toggleWhenPressed(m_turnTo45);
+    // pov90.toggleWhenPressed(m_turnTo90);
+    // pov135.toggleWhenPressed(m_turnTo135);
+    // pov180.toggleWhenPressed(m_turnTo180);
+    // pov225.toggleWhenPressed(m_turnTo45cc);
+    // pov270.toggleWhenPressed(m_turnTo90cc);
+    // pov315.toggleWhenPressed(m_turnTo135cc);
   }
 
   /**
