@@ -103,13 +103,13 @@ public class RobotContainer {
     // Subsystems
     m_driveTrain = new DriveTrain();
     m_dumper = new Dumper();
-    m_dumperHold = new DumperHold(m_dumper);
     
 
     // Commands
     m_driveManually = new DriveManually(m_driveTrain);
     m_driveManually.addRequirements(m_driveTrain);
     m_driveTrain.setDefaultCommand(m_driveManually);
+    m_dumperHold = new DumperHold(m_dumper);
     m_dumper.setDefaultCommand(m_dumperHold);
 
 

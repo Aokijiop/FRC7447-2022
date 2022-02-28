@@ -10,13 +10,11 @@ import frc.robot.Constants;
 
 public class DumperHold extends CommandBase {
   Dumper m_dumper;
-  private boolean is_up;
   
   /** Creates a new DumperHold. */
   public DumperHold(Dumper d) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_dumper = d;
-    is_up = true;
     addRequirements(m_dumper);
   }
 
@@ -27,11 +25,11 @@ public class DumperHold extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(is_up){
-      m_dumper.moveArm(Constants.dumperPreUpSpeed); 
+    if(m_dumper.armIsUp()){
+      m_dumper.moveArm(Constants.dumperHoldUpSpeed); 
     }
-    if(!is_up){
-      m_dumper.moveArm(Constants.dumperPreDownSpeed);
+    if(!m_dumper.armIsUp()){
+      m_dumper.moveArm(Constants.dumperHoldDownSpeed);
     }
   }
 
