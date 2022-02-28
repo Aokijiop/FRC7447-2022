@@ -42,8 +42,8 @@ public final class Constants {
     // Dumper Constants
     public static final double dumperPower = 1.0;
     public static final double dumperRetch = -1.0;
-    public static final double dumperUpSpeed =  1.0;
-    public static final double dumperDownSpeed = -1.0;
+    public static final double dumperUpSpeed =  2.0;
+    public static final double dumperDownSpeed = -2.0;
     
     // Joystick port and axis numbers
     public static final int joystickPort = 0;
@@ -59,6 +59,8 @@ public final class Constants {
     public static final int RButton = 6;
     public static final int LTrigger = 7;
     public static final int RTrigger = 8;
+    public static final int leftJoystickPress = 11;
+    public static final int rightJoystickPress = 12;
 
     // Turn To Angle Velocity Setpoints
     public static final double TTALeftVelocity = 0.0;
