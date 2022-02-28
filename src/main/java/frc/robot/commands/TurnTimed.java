@@ -4,36 +4,42 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Dumper;
-import frc.robot.Constants;
+import frc.robot.subsystems.DriveTrain;
 
-public class DumperIntake extends CommandBase {
-  /** Creates a new MoveDumper. */
-  Dumper m_dumper;
-
-  public DumperIntake(Dumper d) {
+public class TurnTimed extends CommandBase {
+  /** Creates a new TurnTimed. */
+  DriveTrain m_driveTrain;
+  private boolean finish;
+  double turnSpeed;
+  double time;
+  Timer timer;
+  public TurnTimed(DriveTrain dt, double ds, double t) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_dumper = d;
-    addRequirements(m_dumper);
+    m_driveTrain = dt;
+    turnSpeed = ds;
+    time = t;
+    addRequirements(m_driveTrain);
+    timer = new Timer();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    finish = false;
+    timer.reset();
+    timer.start();
+    System.out.println("TurnTimed command initialized");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    m_dumper.intakeOuttake(Constants.dumperPower);
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_dumper.stopIntakeOuttake();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

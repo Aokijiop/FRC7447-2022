@@ -17,6 +17,7 @@ public class Dumper extends SubsystemBase {
   WPI_VictorSPX m_dumperIntakeOuttake;
   CANSparkMax m_dumperArm;
   RelativeEncoder m_armEncoder;
+  private boolean isUp;
 
   public Dumper() {
     m_dumperIntakeOuttake = new WPI_VictorSPX(Constants.dumperPort);
@@ -48,5 +49,17 @@ public class Dumper extends SubsystemBase {
 
   public void stopArm() {
     m_dumperArm.stopMotor();
+  }
+
+  public void isDown() {
+    isUp  = false;
+  }
+
+  public void isUp(){
+    isUp = true;
+  }
+
+  public boolean armIsUp() {
+    return isUp;
   }
 }

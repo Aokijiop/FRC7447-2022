@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Dumper;
 import frc.robot.Constants;
 
-public class DumperIntake extends CommandBase {
-  /** Creates a new MoveDumper. */
+public class DumperHold extends CommandBase {
   Dumper m_dumper;
-
-  public DumperIntake(Dumper d) {
+  
+  /** Creates a new DumperHold. */
+  public DumperHold(Dumper d) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_dumper = d;
     addRequirements(m_dumper);
@@ -20,20 +20,22 @@ public class DumperIntake extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_dumper.intakeOuttake(Constants.dumperPower);
+    if(m_dumper.armIsUp()){
+      m_dumper.moveArm(Constants.dumperHoldUpSpeed); 
+    }
+    if(!m_dumper.armIsUp()){
+      m_dumper.moveArm(Constants.dumperHoldDownSpeed);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_dumper.stopIntakeOuttake();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

@@ -44,6 +44,8 @@ public final class Constants {
     public static final double dumperRetch = -1.0;
     public static final double dumperUpSpeed =  2.0;
     public static final double dumperDownSpeed = -2.0;
+    public static final double dumperHoldUpSpeed = 0.5;
+    public static final double dumperHoldDownSpeed = -0.5;
     
     // Joystick port and axis numbers
     public static final int joystickPort = 0;

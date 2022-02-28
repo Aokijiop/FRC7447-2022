@@ -202,6 +202,10 @@ public class DriveTrain extends SubsystemBase {
     m_drive.arcadeDrive(speed, 0);
   }
 
+  public void turnTimed(double angle) {
+    m_drive.arcadeDrive(0, angle);
+  }
+
   public void stop() {
     m_drive.stopMotor();
   }

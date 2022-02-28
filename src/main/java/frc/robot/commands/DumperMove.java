@@ -38,6 +38,7 @@ public class DumperMove extends CommandBase {
         if (m_dumper.getPosition() >= angleSetpoint) {
             finish = true;
             armUp = true;
+            m_dumper.isUp();
           }
           else {
             m_dumper.moveArm(Constants.dumperUpSpeed);
@@ -49,6 +50,7 @@ public class DumperMove extends CommandBase {
         if (m_dumper.getPosition() <= -375.0f) {
             finish = true;
             armUp = false;
+            m_dumper.isDown();
           }
           else {
             m_dumper.moveArm(Constants.dumperDownSpeed);

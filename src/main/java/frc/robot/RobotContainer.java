@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.HubScoreAuton;
+import frc.robot.commands.DumperHold;
 import frc.robot.commands.BoostBoolean;
 import frc.robot.commands.DriveTimed;
 import frc.robot.commands.DriveManually;
@@ -42,6 +43,7 @@ public class RobotContainer {
   // Subsystems
   private final DriveTrain m_driveTrain;
   private final Dumper m_dumper;
+  
 
   // Commands
   private final DriveManually m_driveManually;
@@ -53,6 +55,7 @@ public class RobotContainer {
   private final DumperMove m_dumperMove;
   private final BoostBoolean m_boost;
   private final DumperTest m_dumperTest;
+  private final DumperHold m_dumperHold;
 
   // Turn to Angle Commands
   private final TurnToAngle m_cancelTurnTo;
@@ -106,6 +109,10 @@ public class RobotContainer {
     m_driveManually = new DriveManually(m_driveTrain);
     m_driveManually.addRequirements(m_driveTrain);
     m_driveTrain.setDefaultCommand(m_driveManually);
+    m_dumperHold = new DumperHold(m_dumper);
+    m_dumper.setDefaultCommand(m_dumperHold);
+
+
     m_driveForwardTimed = new DriveTimed(m_driveTrain, Constants.autonSpeed, Constants.drive_fwd_time);
     m_driveForwardTimed.addRequirements(m_driveTrain);
     m_dumperIntake = new DumperIntake(m_dumper);
@@ -115,6 +122,7 @@ public class RobotContainer {
     m_dumperMove = new DumperMove(m_dumper);
     m_boost = new BoostBoolean(m_driveTrain);
     m_dumperTest = new DumperTest(m_dumper);
+ 
 
     // Turn to Angle Commands
     m_cancelTurnTo = new TurnToAngle(m_driveTrain, 0.0f);
