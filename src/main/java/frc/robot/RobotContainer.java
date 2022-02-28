@@ -85,6 +85,8 @@ public class RobotContainer {
   public static JoystickButton yButton;
   public static JoystickButton LButton;
   public static JoystickButton RButton;
+  public static JoystickButton leftJoystickPress;
+  public static JoystickButton rightJoystickPress;
 
   // POV Buttons
   public static POVButton pov0;
@@ -153,6 +155,8 @@ public class RobotContainer {
     RTrigger = new JoystickButton(m_joystick, Constants.RTrigger);
     LButton = new JoystickButton(m_joystick, Constants.LButton);
     RButton = new JoystickButton(m_joystick, Constants.RButton);
+    leftJoystickPress = new JoystickButton(m_joystick, Constants.leftJoystickPress);
+    rightJoystickPress = new JoystickButton(m_joystick, Constants.rightJoystickPress);
 
     // POV Buttons
     pov0 = new POVButton(m_joystick, 0, 0);
@@ -179,9 +183,11 @@ public class RobotContainer {
     LTrigger.whenHeld(m_dumperIntake);
     RTrigger.whenHeld(m_dumperVomit);
     RButton.whenHeld(m_boost);
-    LButton.toggleWhenPressed(m_dumperMoveMotorUp);
+    leftJoystickPress.whenHeld(m_boost);
+    rightJoystickPress.whenHeld(m_boost);
+    LButton.whenHeld(m_dumperMoveMotorUp);
     // yButton.whenHeld(m_dumperMoveMotorUp);
-    aButton.toggleWhenPressed(m_dumperMoveMotorDown);
+    aButton.whenHeld(m_dumperMoveMotorDown);
     // aButton.toggleWhenPressed(m_dumperTest);
     // pov0.toggleWhenPressed(m_cancelTurnTo);
     // pov45.toggleWhenPressed(m_turnTo45);
