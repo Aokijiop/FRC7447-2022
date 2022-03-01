@@ -23,7 +23,6 @@ public class Dumper extends SubsystemBase {
     m_dumperIntakeOuttake = new WPI_VictorSPX(Constants.dumperPort);
     m_dumperArm = new CANSparkMax(Constants.dumperArmPort, MotorType.kBrushless);
     m_armEncoder = m_dumperArm.getEncoder();
-    m_armEncoder.setPositionConversionFactor((2 * Math.PI) * (180 / Math.PI));
     }
 
   @Override
