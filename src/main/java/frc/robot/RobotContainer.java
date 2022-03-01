@@ -43,7 +43,6 @@ public class RobotContainer {
   private final DriveTrain m_driveTrain;
   private final Dumper m_dumper;
   
-
   // Commands
   private final DriveManually m_driveManually;
   private final DriveTimed m_driveForwardTimed;
@@ -101,7 +100,7 @@ public class RobotContainer {
     // Subsystems
     m_driveTrain = new DriveTrain();
     m_dumper = new Dumper();
-    
+
 
     // Commands
     m_driveManually = new DriveManually(m_driveTrain);

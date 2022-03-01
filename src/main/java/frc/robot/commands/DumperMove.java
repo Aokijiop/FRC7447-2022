@@ -28,6 +28,7 @@ public class DumperMove extends CommandBase {
   public void initialize() {
     timer.reset();
     timer.start();
+    System.out.println("isUp: " + m_dumper.armIsUp());
     finish = false;
     System.out.println("initialized move");
   }
@@ -38,24 +39,24 @@ public class DumperMove extends CommandBase {
     // moves dumper up
     if(!m_dumper.armIsUp()) {
         if (timer.get() >= 1.5f) {
-            finish = true;
-            m_dumper.isUp();
-          }
-          else {
-            m_dumper.moveArm(Constants.dumperUpSpeed);
-            System.out.println("Moving upppp");
-          }
+          m_dumper.isUp();
+          finish = true;
+        }
+        else {
+          m_dumper.moveArm(Constants.dumperUpSpeed);
+          System.out.println("Moving upppp");
+        }
     }
     //moves dumper down 
-    if(m_dumper.armIsUp()) {
+    else if(m_dumper.armIsUp()) {
         if (timer.get() >= 1.5f) {
-            finish = true;
-            m_dumper.isDown();
-          }
-          else {
-            m_dumper.moveArm(Constants.dumperDownSpeed);
-            System.out.println("moving downnnnnn!!");
-          }
+          m_dumper.isDown();
+          finish = true;
+        }
+        else {
+          m_dumper.moveArm(Constants.dumperDownSpeed);
+          System.out.println("moving downnnnnn!!");
+        }
     }
   }
 

@@ -31,6 +31,8 @@ public class DumperHold extends CommandBase {
     if(!m_dumper.armIsUp()){
       m_dumper.moveArm(Constants.dumperHoldDownSpeed);
     }
+
+    m_dumper.intakeOuttake(0.05f);
   }
 
   // Called once the command ends or is interrupted.
