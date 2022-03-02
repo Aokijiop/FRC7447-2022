@@ -24,7 +24,7 @@ public class DumperTest extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_dumper.moveArm(-0.3);
+    System.out.println(m_dumper.getPosition());
   }
 
   // Called once the command ends or is interrupted.

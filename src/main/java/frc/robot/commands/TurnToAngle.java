@@ -10,7 +10,6 @@ import frc.robot.subsystems.DriveTrain;
 public class TurnToAngle extends CommandBase {
   DriveTrain m_driveTrain;
   double angleSetpoint;
-  private boolean finish;
 
   /** Creates a new TurnToAngle. */
   public TurnToAngle(DriveTrain dt, double a) {
@@ -24,7 +23,6 @@ public class TurnToAngle extends CommandBase {
   @Override
   public void initialize() {
     m_driveTrain.resetGyro();
-    finish = false;
     m_driveTrain.setTurnSetpoint(angleSetpoint);
     System.out.println("TurnToAngle command initialized, setpoint set to: " + angleSetpoint);
   }
@@ -32,15 +30,9 @@ public class TurnToAngle extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_driveTrain.atTurnSetpoint()) {
-      finish = true;
-      System.out.println("Setpoint reached");
-    }
-    else {
-      m_driveTrain.updateTurnMeasurement();
-      m_driveTrain.turnToAngle();
-      System.out.println("Command executing");
-    }
+    m_driveTrain.updateTurnMeasurement();
+    m_driveTrain.turnToAngle();
+    System.out.println("Command executing");
   }
 
   // Called once the command ends or is interrupted.
@@ -52,6 +44,6 @@ public class TurnToAngle extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return finish;
+    return m_driveTrain.atTurnSetpoint();
   }
 }

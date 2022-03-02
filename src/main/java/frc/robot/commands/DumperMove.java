@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Dumper;
 import frc.robot.Constants;
@@ -11,21 +12,23 @@ import frc.robot.Constants;
 public class DumperMove extends CommandBase {
   /** Creates a new DumperRaiseLower. */
   Dumper m_dumper;
+  Timer timer;
   private boolean finish;
-  private boolean armUp;
-  private double angleSetpoint = 0.0f;
-
 
   public DumperMove(Dumper d) {
     // Use addRequirements() here to declare subsystem dependencies.
-    armUp = true;
     m_dumper = d;
     addRequirements(m_dumper);
+    timer = new Timer();
+    m_dumper.isUp();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    timer.reset();
+    timer.start();
+    System.out.println("isUp: " + m_dumper.armIsUp());
     finish = false;
     System.out.println("initialized move");
   }
@@ -34,28 +37,26 @@ public class DumperMove extends CommandBase {
   @Override
   public void execute() {
     // moves dumper up
-    if(!armUp) {
-        if (m_dumper.getPosition() >= angleSetpoint) {
-            finish = true;
-            armUp = true;
-            m_dumper.isUp();
-          }
-          else {
-            m_dumper.moveArm(Constants.dumperUpSpeed);
-            System.out.println("Moving upppp");
-          }
+    if(!m_dumper.armIsUp()) {
+        if (timer.get() >= 1.5f) {
+          m_dumper.isUp();
+          finish = true;
+        }
+        else {
+          m_dumper.moveArm(Constants.dumperUpSpeed);
+          System.out.println("Moving upppp");
+        }
     }
-    //moves dumper down
-    if(armUp) {
-        if (m_dumper.getPosition() <= -375.0f) {
-            finish = true;
-            armUp = false;
-            m_dumper.isDown();
-          }
-          else {
-            m_dumper.moveArm(Constants.dumperDownSpeed);
-            System.out.println("moving downnnnnn!!");
-          }
+    //moves dumper down 
+    else if(m_dumper.armIsUp()) {
+        if (timer.get() >= 1.5f) {
+          m_dumper.isDown();
+          finish = true;
+        }
+        else {
+          m_dumper.moveArm(Constants.dumperDownSpeed);
+          System.out.println("moving downnnnnn!!");
+        }
     }
   }
 
@@ -63,6 +64,7 @@ public class DumperMove extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_dumper.stopArm();
+    timer.stop();
     System.out.println("Finished!!");
   }
 

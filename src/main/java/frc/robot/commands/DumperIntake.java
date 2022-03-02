@@ -15,7 +15,6 @@ public class DumperIntake extends CommandBase {
   public DumperIntake(Dumper d) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_dumper = d;
-    addRequirements(m_dumper);
   }
 
   // Called when the command is initially scheduled.

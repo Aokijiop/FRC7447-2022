@@ -96,9 +96,21 @@ public class DriveTrain extends SubsystemBase {
 
     // Differential Drive
     m_leftFront = new WPI_VictorSPX(Constants.leftFront);
+    m_leftFront.configOpenloopRamp(0.5);
+    m_leftFront.configVoltageCompSaturation(12.0);
+    m_leftFront.enableVoltageCompensation(true);
     m_leftBack = new WPI_VictorSPX(Constants.leftBack); 
+    m_leftBack.configOpenloopRamp(0.5);
+    m_leftBack.configVoltageCompSaturation(12.0);
+    m_leftBack.enableVoltageCompensation(true);
     m_rightFront = new WPI_VictorSPX(Constants.rightFront);
+    m_rightFront.configOpenloopRamp(0.5);
+    m_rightFront.configVoltageCompSaturation(12.0);
+    m_rightFront.enableVoltageCompensation(true);
     m_rightBack = new WPI_VictorSPX(Constants.rightBack);
+    m_rightBack.configOpenloopRamp(0.5);
+    m_rightBack.configVoltageCompSaturation(12.0);
+    m_rightBack.enableVoltageCompensation(true);
 
     m_left = new MotorControllerGroup(m_leftFront, m_leftBack);
     m_right = new MotorControllerGroup(m_rightFront, m_rightBack);

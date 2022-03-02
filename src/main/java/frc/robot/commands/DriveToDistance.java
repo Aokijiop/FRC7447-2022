@@ -11,7 +11,6 @@ public class DriveToDistance extends CommandBase {
   DriveTrain m_driveTrain;
   double driveSetpoint;
   double angleSetpoint;
-  private boolean finish;
   /** Creates a new DriveToDistance. */
 
 
@@ -28,7 +27,6 @@ public class DriveToDistance extends CommandBase {
   @Override
   public void initialize() {
     m_driveTrain.resetDistance();
-    finish = false;
     m_driveTrain.setDriveSetpoint(driveSetpoint);
     m_driveTrain.setTurnSetpoint(angleSetpoint);
     System.out.println("Drive to Distance initialized, set point set to " + driveSetpoint);
@@ -37,17 +35,11 @@ public class DriveToDistance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_driveTrain.atLeftDistanceSetpoint() && m_driveTrain.atRightDistanceSetpoint()) {
-      finish = true;
-      System.out.println("Setpoint Reached");
-    }
-    else {
-      m_driveTrain.updateMovementMeasurement();
-      m_driveTrain.updateTurnMeasurement();
-      m_driveTrain.driveToDistance();
-      System.out.println("It do be executing tho no cap");
-      System.out.println("Like fr fr? Like ong? Like no cap on Mama??");
-    }
+    m_driveTrain.updateMovementMeasurement();
+    m_driveTrain.updateTurnMeasurement();
+    m_driveTrain.driveToDistance();
+    System.out.println("It do be executing tho no cap");
+    System.out.println("Like fr fr? Like ong? Like no cap on Mama??");
   }
 
   // Called once the command ends or is interrupted.
@@ -59,6 +51,6 @@ public class DriveToDistance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return finish;
+    return (m_driveTrain.atLeftDistanceSetpoint() && m_driveTrain.atRightDistanceSetpoint());
   }
 }

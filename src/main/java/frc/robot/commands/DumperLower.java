@@ -11,7 +11,6 @@ import frc.robot.Constants;
 public class DumperLower extends CommandBase {
   /** Creates a new DumperMoveDown. */
   Dumper m_dumper;
-  private double angleTarget = -375.0f;
   private boolean finish;
 
   public DumperLower(Dumper d) {
@@ -28,12 +27,8 @@ public class DumperLower extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // if (m_dumper.getPosition() <= angleTarget) {
-    //   finish = true;
-    // }
-    // else {
+    
       m_dumper.moveArm(Constants.dumperDownSpeed);
-    // }
   }
 
   // Called once the command ends or is interrupted.

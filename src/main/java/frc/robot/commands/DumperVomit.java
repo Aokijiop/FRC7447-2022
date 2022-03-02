@@ -13,7 +13,6 @@ public class DumperVomit extends CommandBase {
   Dumper m_dumper;
   public DumperVomit(Dumper d) {
     m_dumper = d;
-    addRequirements(m_dumper);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
