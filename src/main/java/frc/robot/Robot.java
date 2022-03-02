@@ -4,7 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -18,7 +21,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-
+  private final PowerDistribution m_PowerDistr = new PowerDistribution(0, ModuleType.kCTRE);
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -44,6 +47,26 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+
+    // Implements PowerDistribution Module
+    SmartDashboard.putNumber("Amps for Channel 0: ", m_PowerDistr.getCurrent(0));
+    SmartDashboard.putNumber("Amps for Channel 1: ", m_PowerDistr.getCurrent(1));
+    SmartDashboard.putNumber("Amps for Channel 2: ", m_PowerDistr.getCurrent(2));
+    SmartDashboard.putNumber("Amps for Channel 3: ", m_PowerDistr.getCurrent(3));
+    SmartDashboard.putNumber("Amps for Channel 4: ", m_PowerDistr.getCurrent(4));
+    SmartDashboard.putNumber("Amps for Channel 5: ", m_PowerDistr.getCurrent(5));
+    SmartDashboard.putNumber("Amps for Channel 6: ", m_PowerDistr.getCurrent(6));
+    SmartDashboard.putNumber("Amps for Channel 7: ", m_PowerDistr.getCurrent(7));
+    SmartDashboard.putNumber("Amps for Channel 8: ", m_PowerDistr.getCurrent(8));
+    SmartDashboard.putNumber("Amps for Channel 9: ", m_PowerDistr.getCurrent(9));
+    SmartDashboard.putNumber("Amps for Channel 10: ", m_PowerDistr.getCurrent(10));
+    SmartDashboard.putNumber("Amps for Channel 11: ", m_PowerDistr.getCurrent(11));
+    SmartDashboard.putNumber("Amps for Channel 12: ", m_PowerDistr.getCurrent(12));
+    SmartDashboard.putNumber("Amps for Channel 13: ", m_PowerDistr.getCurrent(13));
+    SmartDashboard.putNumber("Amps for Channel 14: ", m_PowerDistr.getCurrent(14));
+    SmartDashboard.putNumber("Amps for Channel 15: ", m_PowerDistr.getCurrent(15));
+    SmartDashboard.putNumber("Total Power from Monitored Channels: ", m_PowerDistr.getTotalPower());
+    SmartDashboard.putNumber("Input Voltage of PDP: ", m_PowerDistr.getVoltage());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

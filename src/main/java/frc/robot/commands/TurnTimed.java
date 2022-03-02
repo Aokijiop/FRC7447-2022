@@ -35,7 +35,15 @@ public class TurnTimed extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_driveTrain.turnTimed(turnSpeed);
+    System.out.println("Driving forward");
+    if (timer.get() >= time) {
+      System.out.println("Time setpoint reached");
+      timer.stop();
+      finish  = true;
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -44,6 +52,6 @@ public class TurnTimed extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finish;
   }
 }
