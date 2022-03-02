@@ -25,14 +25,14 @@ public class DumperHold extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_dumper.armIsUp()){
-      m_dumper.moveArm(Constants.dumperHoldUpSpeed); 
-    }
+    // if(m_dumper.armIsUp()){
+    //   m_dumper.moveArm(Constants.dumperHoldUpSpeed); 
+    // }
     if(!m_dumper.armIsUp()){
       m_dumper.moveArm(Constants.dumperHoldDownSpeed);
     }
 
-    m_dumper.intakeOuttake(0.05f);
+    m_dumper.intakeOuttake(0.15f);
   }
 
   // Called once the command ends or is interrupted.

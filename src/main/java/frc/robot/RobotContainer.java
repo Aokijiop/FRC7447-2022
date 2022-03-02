@@ -19,6 +19,7 @@ import frc.robot.commands.DumperLower;
 //import frc.robot.commands.DumperLower;
 //import frc.robot.commands.DumperRaise;
 import frc.robot.commands.DumperVomit;
+import frc.robot.commands.EncoderTest;
 import frc.robot.commands.LeftBackScoreAuton;
 import frc.robot.commands.DumperMove;
 import frc.robot.commands.DumperRaise;
@@ -53,6 +54,7 @@ public class RobotContainer {
   private final DumperMove m_dumperMove;
   private final BoostBoolean m_boost;
   private final DumperHold m_dumperHold;
+  private final EncoderTest m_encoderTest;
 
   // Turn to Angle Commands
   private final TurnToAngle m_cancelTurnTo;
@@ -105,7 +107,7 @@ public class RobotContainer {
     // Commands
     m_driveManually = new DriveManually(m_driveTrain);
     m_driveManually.addRequirements(m_driveTrain);
-    m_driveTrain.setDefaultCommand(m_driveManually);
+    // m_driveTrain.setDefaultCommand(m_driveManually); // Change back to m_driveManually
     m_dumperHold = new DumperHold(m_dumper);
     m_dumper.setDefaultCommand(m_dumperHold);
     m_driveForwardTimed = new DriveTimed(m_driveTrain, Constants.autonSpeed, Constants.drive_fwd_time);
@@ -116,7 +118,8 @@ public class RobotContainer {
     m_dumperMoveMotorUp = new DumperRaise(m_dumper);
     m_dumperMove = new DumperMove(m_dumper);
     m_boost = new BoostBoolean(m_driveTrain);
-    
+    m_encoderTest = new EncoderTest(m_driveTrain);
+    m_driveTrain.setDefaultCommand(m_driveManually);
  
 
     // Turn to Angle Commands
@@ -183,7 +186,7 @@ public class RobotContainer {
     LButton.toggleWhenPressed(m_dumperMove);
     yButton.whenHeld(m_dumperMoveMotorUp);
     aButton.whenHeld(m_dumperMoveMotorDown);
-    // aButton.toggleWhenPressed(m_dumperTest);
+    bButton.toggleWhenPressed(m_encoderTest);
     // pov0.toggleWhenPressed(m_cancelTurnTo);
     // pov45.toggleWhenPressed(m_turnTo45);
     // pov90.toggleWhenPressed(m_turnTo90);

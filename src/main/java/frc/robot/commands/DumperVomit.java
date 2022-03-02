@@ -24,6 +24,10 @@ public class DumperVomit extends CommandBase {
   @Override
   public void execute() {
     m_dumper.intakeOuttake(Constants.dumperRetch);
+
+    if(!m_dumper.armIsUp()){
+      m_dumper.moveArm(Constants.dumperHoldDownSpeed);
+    }
   }
 
   // Called once the command ends or is interrupted.

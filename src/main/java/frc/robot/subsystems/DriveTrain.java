@@ -166,6 +166,11 @@ public class DriveTrain extends SubsystemBase {
     System.out.println("Update Movement Measurement");
   }
 
+  public void printMovementMeasurement() {
+    System.out.println("Left: " + m_leftEncoder.getDistance());
+    System.out.println("Right: " + m_rightEncoder.getDistance());
+  }
+
   public boolean atLeftDistanceSetpoint() {
     return m_leftDistanceController.atSetpoint();
   }
