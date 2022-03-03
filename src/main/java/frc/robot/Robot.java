@@ -49,22 +49,22 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
 
     // Implements PowerDistribution Module
-    SmartDashboard.putNumber("Amps for Channel 0: ", m_PowerDistr.getCurrent(0));
-    SmartDashboard.putNumber("Amps for Channel 1: ", m_PowerDistr.getCurrent(1));
-    SmartDashboard.putNumber("Amps for Channel 2: ", m_PowerDistr.getCurrent(2));
-    SmartDashboard.putNumber("Amps for Channel 3: ", m_PowerDistr.getCurrent(3));
-    SmartDashboard.putNumber("Amps for Channel 4: ", m_PowerDistr.getCurrent(4));
-    SmartDashboard.putNumber("Amps for Channel 5: ", m_PowerDistr.getCurrent(5));
-    SmartDashboard.putNumber("Amps for Channel 6: ", m_PowerDistr.getCurrent(6));
-    SmartDashboard.putNumber("Amps for Channel 7: ", m_PowerDistr.getCurrent(7));
-    SmartDashboard.putNumber("Amps for Channel 8: ", m_PowerDistr.getCurrent(8));
-    SmartDashboard.putNumber("Amps for Channel 9: ", m_PowerDistr.getCurrent(9));
-    SmartDashboard.putNumber("Amps for Channel 10: ", m_PowerDistr.getCurrent(10));
-    SmartDashboard.putNumber("Amps for Channel 11: ", m_PowerDistr.getCurrent(11));
-    SmartDashboard.putNumber("Amps for Channel 12: ", m_PowerDistr.getCurrent(12));
-    SmartDashboard.putNumber("Amps for Channel 13: ", m_PowerDistr.getCurrent(13));
-    SmartDashboard.putNumber("Amps for Channel 14: ", m_PowerDistr.getCurrent(14));
-    SmartDashboard.putNumber("Amps for Channel 15: ", m_PowerDistr.getCurrent(15));
+    SmartDashboard.putNumber("Amps for Channel 0 (MC 4 - Dumper Intake/Outtake): ", m_PowerDistr.getCurrent(0));
+    SmartDashboard.putNumber("Amps for Channel 1 (MC 3 - Right Back): ", m_PowerDistr.getCurrent(1));
+    // SmartDashboard.putNumber("Amps for Channel 2: ", m_PowerDistr.getCurrent(2));
+    SmartDashboard.putNumber("Amps for Channel 3 (MC 2 - Right Front): ", m_PowerDistr.getCurrent(3));
+    // SmartDashboard.putNumber("Amps for Channel 4: ", m_PowerDistr.getCurrent(4));
+    // SmartDashboard.putNumber("Amps for Channel 5: ", m_PowerDistr.getCurrent(5));
+    // SmartDashboard.putNumber("Amps for Channel 6: ", m_PowerDistr.getCurrent(6));
+    // SmartDashboard.putNumber("Amps for Channel 7: ", m_PowerDistr.getCurrent(7));
+    // SmartDashboard.putNumber("Amps for Channel 8: ", m_PowerDistr.getCurrent(8));
+    // SmartDashboard.putNumber("Amps for Channel 9: ", m_PowerDistr.getCurrent(9));
+    // SmartDashboard.putNumber("Amps for Channel 10: ", m_PowerDistr.getCurrent(10));
+    // SmartDashboard.putNumber("Amps for Channel 11: ", m_PowerDistr.getCurrent(11));
+    SmartDashboard.putNumber("Amps for Channel 12 (MC 1 - Left Back): ", m_PowerDistr.getCurrent(12));
+    SmartDashboard.putNumber("Amps for Channel 13 (MC 0 - Left Front): ", m_PowerDistr.getCurrent(13));
+    SmartDashboard.putNumber("Amps for Channel 14 (MC 8 - Dumper Arm): ", m_PowerDistr.getCurrent(14));
+    // SmartDashboard.putNumber("Amps for Channel 15: ", m_PowerDistr.getCurrent(15));
     SmartDashboard.putNumber("Total Power from Monitored Channels: ", m_PowerDistr.getTotalPower());
     SmartDashboard.putNumber("Input Voltage of PDP: ", m_PowerDistr.getVoltage());
   }

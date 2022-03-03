@@ -183,9 +183,6 @@ public class RobotContainer {
     RButton.whenHeld(m_boost);
     leftJoystickPress.whenHeld(m_boost);
     rightJoystickPress.whenHeld(m_boost);
-    LButton.toggleWhenPressed(m_dumperMove);
-    yButton.whenHeld(m_dumperMoveMotorUp);
-    aButton.whenHeld(m_dumperMoveMotorDown);
     bButton.toggleWhenPressed(m_encoderTest);
     // pov0.toggleWhenPressed(m_cancelTurnTo);
     // pov45.toggleWhenPressed(m_turnTo45);
