@@ -38,7 +38,7 @@ public class DumperMove extends CommandBase {
   public void execute() {
     // moves dumper up
     if(!m_dumper.armIsUp()) {
-        if (timer.get() >= 1.5f) {
+        if (timer.get() >= 1.6f) {
           m_dumper.isUp();
           finish = true;
         }
@@ -49,7 +49,7 @@ public class DumperMove extends CommandBase {
     }
     //moves dumper down 
     else if(m_dumper.armIsUp()) {
-        if (timer.get() >= 1.5f) {
+        if (timer.get() >= 1.4f) {
           m_dumper.isDown();
           finish = true;
         }

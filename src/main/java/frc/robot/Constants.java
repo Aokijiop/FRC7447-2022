@@ -25,8 +25,8 @@ public final class Constants {
     public static final int dumperArmPort = 8;
 
     // DIO Ports
-    public static final int leftEncoderA = 0;
-    public static final int leftEncoderB = 1;
+    public static final int leftEncoderA = 1;
+    public static final int leftEncoderB = 0;
     public static final int rightEncoderA = 2;
     public static final int rightEncoderB = 3;
 
