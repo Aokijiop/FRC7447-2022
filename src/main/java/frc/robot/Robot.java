@@ -4,6 +4,15 @@
 
 package frc.robot;
 
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
+
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -19,6 +28,8 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+  Thread m_visionThread;
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -28,10 +39,37 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-  }
 
-  /**
-   * This function is called every robot packet, no matter the mode. Use this for items like
+    m_visionThread = new Thread();
+    // Get USBCam from server
+    try (UsbCamera m_camera = new UsbCamera("climb cam 0", 0)) {
+      // Set camera resolution
+      m_camera.setResolution(640, 480);
+
+      CvSink m_cvsink = CameraServer.getVideo();
+      CvSource m_outputStream = CameraServer.putVideo("lakdjflak", 640, 480);
+
+      Mat m_mat = new Mat();
+
+      while(!Thread.interrupted()) {
+        if (m_cvsink.grabFrame(m_mat) == 0){
+          m_outputStream.notifyError(m_cvsink.getError());
+          continue;
+        }
+
+      Imgproc.rectangle(
+        m_mat, new Point(100, 100), new Point(400, 400), new Scalar(255, 255, 255), 5
+      );
+      m_outputStream.putFrame(m_mat);
+      }
+    } catch(Exception e) {
+      e.printStackTrace();
+    }
+
+  m_visionThread.setDaemon(true);
+  m_visionThread.start();
+  }
+   /* This function is called every robot packet, no matter the mode. Use this for items like
    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
    *
    * <p>This runs after the mode specific periodic functions, but before LiveWindow and
