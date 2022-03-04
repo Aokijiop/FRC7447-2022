@@ -20,6 +20,6 @@ public class CenterBackDoubleScoreAuton extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     m_wait = new Wait(3.0f);
-    addCommands(new ParallelCommandGroup(new DumperMove(d), new DriveToDistance(dt, FROMTARMACTOBALL), new DumperIntake(d).raceWith(m_wait)), new ParrallelCommandGroup(new DumperMove(d), new TurnToAngle(dt, 180.0f)), new DriveToDistance(dt, FROMBALLTOGOAL), new turnToAngle(dt, SOMEANGLE), new DumperVomit(d).raceWith(m_wait), new ParallelCommandGroup(new DumperMove(d), new TurnToAngle(dt, 180.0f)), new DriveToDistance(dt, EXITINGTARMAC));
+    addCommands(new TurnToAngle(dt, 7.0f), new ParallelCommandGroup(new DumperMove(d), new DriveToDistance(dt, 1.66), new DumperIntake(d).raceWith(m_wait), new TurnToAngle(dt, 7.0f)), new ParallelCommandGroup(new DumperMove(d), new TurnToAngle(dt, 180.0f)), new DriveToDistance(dt, 1.47), new TurnToAngle(dt, -15.0f), new DumperVomit(d).raceWith(m_wait), new ParallelCommandGroup(new DumperMove(d), new TurnToAngle(dt, 180.0f)), new DriveToDistance(dt, 2.0f));
   }
 }
